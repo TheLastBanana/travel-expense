@@ -1,4 +1,4 @@
-package ca.ualberta.cs.travelexpense;
+package ca.ualberta.cs.colpnotes;
 
 import android.app.Activity;
 import android.os.Bundle;
