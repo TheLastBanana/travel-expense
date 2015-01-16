@@ -4,5 +4,9 @@
     <string name="app_name">colp-notes</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="claims_label">Claims</string>
+    <string name="action_add_claim">Add Claim</string>
+    <string name="edit_claim_label">Edit Claim</string>
+    <string name="name_hint">Name</string>
 
 </resources>
