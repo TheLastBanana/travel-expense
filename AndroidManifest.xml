@@ -34,6 +34,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ca.ualberta.cs.colpnotes.MainActivity" />
         </activity>
+        <activity
+            android:name=".EditExpenseActivity"
+            android:label="@string/edit_expense_label" >
+        </activity>
     </application>
 
 </manifest>

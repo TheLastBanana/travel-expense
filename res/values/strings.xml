@@ -7,6 +7,11 @@
     <string name="name_hint">Name</string>
     <string name="destination_hint">Destination</string>
     <string name="reason_hint">Reason for travel</string>
+    <string name="amount_hint">Amount</string>
+    <string name="currency_hint">Currency</string>
+    <string name="category_hint">Category</string>
+    <string name="date_hint">Date</string>
+    <string name="description_hint">Description</string>
     <string name="action_add_claim">Add claim</string>
     <string name="action_edit_claim">Edit claim</string>
     <string name="action_add_expense">Add expense</string>
@@ -22,5 +27,6 @@
     <string name="from_label">FROM</string>
     <string name="to_label">TO</string>
     <string name="list_expenses_label">Expenses</string>
+    <string name="edit_expense_label">Edit expense</string>
 
 </resources>
