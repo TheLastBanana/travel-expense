@@ -4,19 +4,23 @@
     <string name="app_name">colp-notes</string>
     <string name="action_settings">Settings</string>
     <string name="claims_label">Claims</string>
-    <string name="action_add_claim">Add claim</string>
-    <string name="edit_claim_label">Edit claim</string>
     <string name="name_hint">Name</string>
     <string name="destination_hint">Destination</string>
     <string name="reason_hint">Reason for travel</string>
+    <string name="action_add_claim">Add claim</string>
+    <string name="action_edit_claim">Edit claim</string>
+    <string name="action_add_expense">Add expense</string>
     <string name="action_cancel">Cancel</string>
     <string name="action_discard_changes">Discard changes</string>
     <string name="action_accept">Accept</string>
-    <string name="action_delete">Delete</string>
+    <string name="action_delete_claim">Delete claim</string>
     <string name="action_submit_claim">Mark as submitted</string>
     <string name="action_return_claim">Mark as returned</string>
     <string name="action_approve_claim">Mark as approved</string>
-    <string name="label_from">FROM</string>
-    <string name="label_to">TO</string>
+    <string name="action_mail_claim">Email claim</string>
+    <string name="edit_claim_label">Edit claim</string>
+    <string name="from_label">FROM</string>
+    <string name="to_label">TO</string>
+    <string name="list_expenses_label">Expenses</string>
 
 </resources>

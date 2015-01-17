@@ -1,0 +1,47 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ca.ualberta.cs.colpnotes.ListExpensesActivity" >
+    
+	<item android:id="@+id/action_add_expense"
+          android:orderInCategory="100"
+	      android:icon="@drawable/ic_action_new"
+	      android:title="@string/action_add_expense"
+	      android:showAsAction="ifRoom" />
+    
+	<item android:id="@+id/action_edit_claim"
+          android:orderInCategory="100"
+	      android:icon="@drawable/ic_action_edit"
+	      android:title="@string/action_edit_claim"
+	      android:showAsAction="ifRoom" />
+    
+	<item android:id="@+id/action_mail_claim"
+          android:orderInCategory="100"
+	      android:icon="@drawable/ic_action_email"
+	      android:title="@string/action_mail_claim"
+	      android:showAsAction="ifRoom" />
+    
+	<item
+        android:id="@+id/action_submit_claim"
+        android:orderInCategory="101"
+        android:showAsAction="never"
+        android:title="@string/action_submit_claim" />
+    
+	<item
+        android:id="@+id/action_return_claim"
+        android:orderInCategory="101"
+        android:showAsAction="never"
+        android:title="@string/action_return_claim" />
+    
+	<item
+        android:id="@+id/action_approve_claim"
+        android:orderInCategory="101"
+        android:showAsAction="never"
+        android:title="@string/action_approve_claim" />
+    
+	<item
+        android:id="@+id/action_delete_claim"
+        android:orderInCategory="102"
+        android:showAsAction="never"
+        android:title="@string/action_delete_claim" />
+
+</menu>

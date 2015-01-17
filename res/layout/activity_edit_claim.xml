@@ -27,7 +27,7 @@
         android:paddingEnd="4dp"
         android:paddingStart="4dp"
         android:paddingTop="8dp"
-        android:text="@string/label_from"
+        android:text="@string/from_label"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -51,7 +51,7 @@
         android:paddingEnd="4dp"
         android:paddingStart="4dp"
         android:paddingTop="8dp"
-        android:text="@string/label_to"
+        android:text="@string/to_label"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView

@@ -17,8 +17,17 @@
             android:name=".MainActivity"
             android:label="@string/claims_label" >
         </activity>
-        <activity android:name="EditClaimActivity"
-            	  android:label="@string/edit_claim_label">
+        <activity
+            android:name=".EditClaimActivity"
+            android:label="@string/edit_claim_label" >
+        </activity>
+        <activity
+            android:name=".ListExpensesActivity"
+            android:label="@string/list_expenses_label"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.ualberta.cs.colpnotes.MainActivity" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
