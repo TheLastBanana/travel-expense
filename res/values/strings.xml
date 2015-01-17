@@ -7,9 +7,16 @@
     <string name="action_add_claim">Add claim</string>
     <string name="edit_claim_label">Edit claim</string>
     <string name="name_hint">Name</string>
+    <string name="destination_hint">Destination</string>
+    <string name="reason_hint">Reason for travel</string>
     <string name="action_cancel">Cancel</string>
     <string name="action_discard_changes">Discard changes</string>
     <string name="action_accept">Accept</string>
     <string name="action_delete">Delete</string>
+    <string name="action_submit_claim">Mark as submitted</string>
+    <string name="action_return_claim">Mark as returned</string>
+    <string name="action_approve_claim">Mark as approved</string>
+    <string name="label_from">FROM</string>
+    <string name="label_to">TO</string>
 
 </resources>
