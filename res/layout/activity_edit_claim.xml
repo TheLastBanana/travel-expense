@@ -42,8 +42,8 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/claim_from_textview"
         android:layout_marginTop="-5dp"
-        android:text="Sat, Jan 17, 2015"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:onClick="pickFromDate" />
 
     <TextView
         android:id="@+id/claim_to_textview"
@@ -66,8 +66,8 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/claim_to_textview"
         android:layout_marginTop="-5dp"
-        android:text="Sat, Jan 17, 2015"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:onClick="pickToDate" />
 
     <EditText
         android:id="@+id/claim_destination_edittext"
