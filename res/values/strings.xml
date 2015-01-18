@@ -24,9 +24,14 @@
     <string name="action_approve_claim">Mark as approved</string>
     <string name="action_mail_claim">Email claim</string>
     <string name="edit_claim_label">Edit claim</string>
+    
     <string name="from_label">FROM</string>
     <string name="to_label">TO</string>
     <string name="list_expenses_label">Expenses</string>
     <string name="edit_expense_label">Edit expense</string>
+    <string name="in_progress_label">in progress</string>
+    <string name="submitted_label">submitted</string>
+    <string name="returned_label">returned</string>
+    <string name="approved_label">approved</string>
 
 </resources>
