@@ -1,12 +1,18 @@
 package ca.ualberta.cs.colpnotes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /*
  * Holds Claims. Wherever possible, use delegate functions implemented here
  * instead of directly calling ClaimList.getClaims().<function>.
  */
-public class ClaimList {
+public class ClaimList implements Serializable {
+	/**
+	 * Generated ID
+	 */
+    private static final long serialVersionUID = -1455114587291688119L;
+    
 	private ArrayList<Claim> claims = null;
 	
 	public ClaimList() {

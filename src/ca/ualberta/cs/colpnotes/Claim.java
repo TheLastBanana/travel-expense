@@ -1,12 +1,18 @@
 package ca.ualberta.cs.colpnotes;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /*
  * Holds information about a claim, including its corresponding Expenses.
  * Also responsible for validating this data in setter functions.
  */
-public class Claim {
+public class Claim implements Serializable {
+	/**
+	 * Generated ID
+	 */
+    private static final long serialVersionUID = -5147034485394091896L;
+    
 	private String name;
 	private String destination;
 	private String reason;
