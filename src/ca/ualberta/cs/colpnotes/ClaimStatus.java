@@ -1,6 +1,6 @@
 package ca.ualberta.cs.colpnotes;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 /*
@@ -17,7 +17,7 @@ public enum ClaimStatus {
 	APPROVED;
 	
 	private static final Map<ClaimStatus, Integer> nameIDs
-		= new HashMap<ClaimStatus, Integer>();
+		= new EnumMap<ClaimStatus, Integer>(ClaimStatus.class);
 	
 	static {
 		nameIDs.put(IN_PROGRESS, R.string.in_progress_label);
