@@ -3,6 +3,8 @@ package ca.ualberta.cs.colpnotes;
 import java.util.Calendar;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.DatePicker;
@@ -17,6 +19,7 @@ public class DatePickerController {
 	private TextView textView;
 	private Calendar calendar;
 	private DatePickerDialog.OnDateSetListener listener;
+	private boolean cancelled = false;
 	
 	/**
 	 * Construct the DatePickerController.
@@ -39,18 +42,41 @@ public class DatePickerController {
     }
 	
 	private void showDialog() {
+		cancelled = true;
+		
+		// Create the dialog
 		DatePickerDialog dialog = new DatePickerDialog(textView.getContext(),
 				new DatePickerDialog.OnDateSetListener() {
 					@Override
 					public void onDateSet(DatePicker view, int year, int monthOfYear,
 					        int dayOfMonth) {
-						setDate(year, monthOfYear, dayOfMonth);
-						listener.onDateSet(view, year, monthOfYear, dayOfMonth);
+						
+						if (!cancelled) {
+							setDate(year, monthOfYear, dayOfMonth);
+							listener.onDateSet(view, year, monthOfYear, dayOfMonth);
+						}
 					}
 				},
 				this.calendar.get(Calendar.YEAR),
 				this.calendar.get(Calendar.MONTH),
 				this.calendar.get(Calendar.DAY_OF_MONTH));
+		
+		// Multi-button setup based on code from:
+		// http://stackoverflow.com/a/21529892
+		// Accessed on 19/01/15
+		dialog.setButton(Dialog.BUTTON_POSITIVE, "Set", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				cancelled = false;
+			}
+		});
+		
+		dialog.setButton(Dialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				cancelled = true;
+			}
+		});
 		
 		dialog.show();
 	}
