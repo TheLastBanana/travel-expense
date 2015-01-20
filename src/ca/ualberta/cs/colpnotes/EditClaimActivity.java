@@ -16,10 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class EditClaimActivity extends Activity {
+	public static final String CLAIM_INDEX = "CLAIM_INDEX";
+	
 	private View actionBarView;
 	private Claim claim = null;
 	private boolean newClaim = false;
-
 	private DatePickerController fromPicker = null;
 	private DatePickerController toPicker = null;
 	private Calendar fromDate;
@@ -75,7 +76,7 @@ public class EditClaimActivity extends Activity {
         // Get the claim
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-        	int claimIndex = extras.getInt("claimIndex", -1);
+        	int claimIndex = extras.getInt(CLAIM_INDEX, -1);
         	
         	if (claimIndex != -1) claim = ClaimListController.getClaimList().getClaim(claimIndex);
         }
