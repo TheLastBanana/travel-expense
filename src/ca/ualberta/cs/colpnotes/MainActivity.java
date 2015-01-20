@@ -39,8 +39,8 @@ public class MainActivity extends Activity {
 				Claim claim = claimListAdapter.getItem(position);
 				int claimIndex = ClaimListController.getClaimList().indexOf(claim);
 				
-		    	Intent intent = new Intent(MainActivity.this, EditClaimActivity.class);
-		    	intent.putExtra(EditClaimActivity.CLAIM_INDEX, claimIndex);
+		    	Intent intent = new Intent(MainActivity.this, ListExpensesActivity.class);
+		    	intent.putExtra(ListExpensesActivity.CLAIM_INDEX, claimIndex);
 		    	
 		    	startActivity(intent);
             }
