@@ -17,8 +17,8 @@ public class Claim implements Serializable {
 	private String destination = "";
 	private String reason = "";
 	private ClaimStatus status = ClaimStatus.IN_PROGRESS;
-	private Calendar start = Calendar.getInstance();
-	private Calendar end = Calendar.getInstance();
+	private Calendar from = Calendar.getInstance();
+	private Calendar to = Calendar.getInstance();
 
 	public String getName() {
 		return name;
@@ -44,20 +44,20 @@ public class Claim implements Serializable {
 		this.reason = reason;
 	}
 
-	public Calendar getStart() {
-		return start;
+	public Calendar getFrom() {
+		return from;
 	}
 
-	public void setStart(Calendar start) {
-		this.start = start;
+	public void setFrom(Calendar from) {
+		this.from = from;
 	}
 
-	public Calendar getEnd() {
-		return end;
+	public Calendar getTo() {
+		return to;
 	}
 
-	public void setEnd(Calendar end) {
-		this.end = end;
+	public void setTo(Calendar to) {
+		this.to = to;
 	}
 
 	public ClaimStatus getStatus() {

@@ -51,14 +51,14 @@ public class EditClaimActivity extends Activity {
         
         // Set up the date fields
         TextView fromText = (TextView) findViewById(R.id.claim_from_date_edittext);
-        fromPicker = new DatePickerController(fromText, claim.getStart(),
+        fromPicker = new DatePickerController(fromText, claim.getFrom(),
         		new android.app.DatePickerDialog.OnDateSetListener() {
 					@Override
 					public void onDateSet(DatePicker view, int year, int monthOfYear,
 					        int dayOfMonth) {
 						
-						Calendar from = claim.getStart();
-						Calendar to = claim.getEnd();
+						Calendar from = claim.getFrom();
+						Calendar to = claim.getTo();
 						
 		        		// Make sure start date comes before end date
 						if (from.after(to)) {
@@ -68,14 +68,14 @@ public class EditClaimActivity extends Activity {
 				});
         
         TextView toText = (TextView) findViewById(R.id.claim_to_date_edittext);
-        toPicker = new DatePickerController(toText, claim.getEnd(),
+        toPicker = new DatePickerController(toText, claim.getTo(),
         		new android.app.DatePickerDialog.OnDateSetListener() {
 					@Override
 					public void onDateSet(DatePicker view, int year, int monthOfYear,
 					        int dayOfMonth) {
 
-						Calendar from = claim.getStart();
-						Calendar to = claim.getEnd();
+						Calendar from = claim.getFrom();
+						Calendar to = claim.getTo();
 						
 		        		// Make sure start date comes before end date
 						if (from.after(to)) {
