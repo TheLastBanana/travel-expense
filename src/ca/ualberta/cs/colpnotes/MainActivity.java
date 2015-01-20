@@ -30,6 +30,13 @@ public class MainActivity extends Activity {
         ListView listView = (ListView) findViewById(R.id.claim_list_view);
         listView.setAdapter(claimListAdapter);
     }
+    
+    @Override
+    protected void onResume() {
+    	if (claimListAdapter != null) claimListAdapter.notifyDataSetChanged();
+    	
+        super.onResume();
+    }
 
     public void addClaim() {
     	Intent intent = new Intent(MainActivity.this, EditClaimActivity.class);
