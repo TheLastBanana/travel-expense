@@ -42,4 +42,8 @@ public class ClaimList implements Serializable {
 	public int size() {
 		return claims.size();
 	}
+
+	public int indexOf(Object object) {
+	    return claims.indexOf(object);
+    }
 }

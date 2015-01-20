@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,6 +31,20 @@ public class MainActivity extends Activity {
         // Attach to the ListView 
         ListView listView = (ListView) findViewById(R.id.claim_list_view);
         listView.setAdapter(claimListAdapter);
+        listView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                    int position, long id) {
+	            
+				Claim claim = claimListAdapter.getItem(position);
+				int claimIndex = ClaimListController.getClaimList().indexOf(claim);
+				
+		    	Intent intent = new Intent(MainActivity.this, EditClaimActivity.class);
+		    	intent.putExtra("claimIndex", claimIndex);
+		    	
+		    	startActivity(intent);
+            }
+		});
     }
     
     @Override

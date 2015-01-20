@@ -73,8 +73,10 @@ public class EditClaimActivity extends Activity {
         setContentView(R.layout.activity_edit_claim);
         
         // Get the claim
-        if (savedInstanceState != null) {
-        	int claimIndex = savedInstanceState.getInt("claimIndex", -1);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+        	int claimIndex = extras.getInt("claimIndex", -1);
+        	
         	if (claimIndex != -1) claim = ClaimListController.getClaimList().getClaim(claimIndex);
         }
         
