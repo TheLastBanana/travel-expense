@@ -13,12 +13,12 @@ public class Claim implements Serializable {
 	 */
     private static final long serialVersionUID = -5147034485394091896L;
     
-	private String name;
-	private String destination;
-	private String reason;
-	private ClaimStatus status;
-	private Calendar start;
-	private Calendar end;
+	private String name = "";
+	private String destination = "";
+	private String reason = "";
+	private ClaimStatus status = ClaimStatus.IN_PROGRESS;
+	private Calendar start = Calendar.getInstance();
+	private Calendar end = Calendar.getInstance();
 
 	public String getName() {
 		return name;
