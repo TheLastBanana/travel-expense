@@ -1,15 +1,20 @@
 package ca.ualberta.cs.colpnotes;
 
+import java.util.Calendar;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 public class EditClaimActivity extends Activity {
 	private View actionBarView;
 	private Claim claim = null;
+	DatePickerController fromPicker = null;
+	DatePickerController toPicker = null;
 	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -46,9 +51,37 @@ public class EditClaimActivity extends Activity {
         
         // Set up the date fields
         TextView fromText = (TextView) findViewById(R.id.claim_from_date_edittext);
-        final DatePickerController fromPicker = new DatePickerController(fromText, claim.getStart());
+        fromPicker = new DatePickerController(fromText, claim.getStart(),
+        		new android.app.DatePickerDialog.OnDateSetListener() {
+					@Override
+					public void onDateSet(DatePicker view, int year, int monthOfYear,
+					        int dayOfMonth) {
+						
+						Calendar from = claim.getStart();
+						Calendar to = claim.getEnd();
+						
+		        		// Make sure start date comes before end date
+						if (from.after(to)) {
+							toPicker.setDate(from.get(Calendar.YEAR), from.get(Calendar.MONTH), from.get(Calendar.DAY_OF_MONTH));
+						}
+					}
+				});
         
         TextView toText = (TextView) findViewById(R.id.claim_to_date_edittext);
-        final DatePickerController toPicker = new DatePickerController(toText, claim.getEnd());
+        toPicker = new DatePickerController(toText, claim.getEnd(),
+        		new android.app.DatePickerDialog.OnDateSetListener() {
+					@Override
+					public void onDateSet(DatePicker view, int year, int monthOfYear,
+					        int dayOfMonth) {
+
+						Calendar from = claim.getStart();
+						Calendar to = claim.getEnd();
+						
+		        		// Make sure start date comes before end date
+						if (from.after(to)) {
+							fromPicker.setDate(to.get(Calendar.YEAR), to.get(Calendar.MONTH), to.get(Calendar.DAY_OF_MONTH));
+						}
+					}
+				});
 	}
 }
