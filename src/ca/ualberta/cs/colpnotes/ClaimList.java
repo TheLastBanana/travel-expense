@@ -31,6 +31,10 @@ public class ClaimList implements Serializable {
 		claims.remove(claim);
 	}
 	
+	public Claim getClaim(int index) {
+		return claims.get(index);
+	}
+	
 	public boolean contains(Claim claim) {
 		return claims.contains(claim);
 	}

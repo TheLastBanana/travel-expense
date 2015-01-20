@@ -23,6 +23,8 @@
     <string name="action_return_claim">Mark as returned</string>
     <string name="action_approve_claim">Mark as approved</string>
     <string name="action_mail_claim">Email claim</string>
+    <string name="action_set">Set</string>
+    <string name="action_discard">Discard</string>
     <string name="edit_claim_label">Edit claim</string>
     
     <string name="from_label">FROM</string>
@@ -33,5 +35,7 @@
     <string name="submitted_label">submitted</string>
     <string name="returned_label">returned</string>
     <string name="approved_label">approved</string>
+    
+    <string name="discard_message">Are you sure you want to discard these changes?</string>
 
 </resources>
