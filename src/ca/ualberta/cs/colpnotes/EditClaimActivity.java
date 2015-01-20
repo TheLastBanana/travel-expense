@@ -1,17 +1,10 @@
 package ca.ualberta.cs.colpnotes;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.DialogFragment;
-import android.app.DatePickerDialog.OnDateSetListener;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.TextView;
 
 public class EditClaimActivity extends Activity {
@@ -24,30 +17,9 @@ public class EditClaimActivity extends Activity {
         ActionBar actionBar = getActionBar();
         actionBar.setCustomView(actionBarView);
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        //actionBar.setDisplayHomeAsUpEnabled(true);
         getMenuInflater().inflate(R.menu.edit_claim, menu);
         
         return true;
-    }
-    
-    /** Called when the user wants to set the "from" date. */
-    public void pickFromDate(View v) {
-    	DialogFragment picker = DatePickerFragment.newInstance(claim.getStart(), new OnDateSetListener() {
-			@Override
-			public void onDateSet(DatePicker view, int year, int month, int day) {
-				Calendar cal = Calendar.getInstance();
-				cal.set(year, month, day);
-				claim.setStart(cal);
-				updateFromDate();
-			}
-		});
-    	
-    	picker.show(getFragmentManager(), "datePicker");
-    }
-    
-    /** Called when the user wants to set the "to" date. */
-    public void pickToDate(View v) {
-    	
     }
 
 	/** Called when the activity is first created. */
@@ -71,20 +43,12 @@ public class EditClaimActivity extends Activity {
         	((TextView) findViewById(R.id.claim_destination_edittext)).setText(claim.getDestination());
         	((TextView) findViewById(R.id.claim_reason_edittext)).setText(claim.getReason());
         }
-	}
-
-	/** Update the "from" date view. */
-	//TODO: this should probably be its own class
-	private void updateFromDate() {
-		TextView fromText = (TextView) findViewById(R.id.claim_from_date_edittext);
-		Calendar cal = claim.getStart();
-		
-		String dateString = DateFormat.getMediumDateFormat(this).format(cal.getTime());
-		fromText.setText(dateString);
-	}
-
-	/** Update the "to" date. */
-	private void updateToDate() {
-		
+        
+        // Set up the date fields
+        TextView fromText = (TextView) findViewById(R.id.claim_from_date_edittext);
+        final DatePickerController fromPicker = new DatePickerController(fromText, claim.getStart());
+        
+        TextView toText = (TextView) findViewById(R.id.claim_to_date_edittext);
+        final DatePickerController toPicker = new DatePickerController(toText, claim.getEnd());
 	}
 }
