@@ -15,6 +15,13 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/*
+ * Lets the user modify the settings for a claim.
+ * 
+ * If CLAIM_INDEX is passed as an integer extra, then the claim in
+ * ClaimListController at index CLAIM_INDEX will be edited rather
+ * than creating a new one.
+ */
 public class EditClaimActivity extends Activity {
 	public static final String CLAIM_INDEX = "CLAIM_INDEX";
 	
