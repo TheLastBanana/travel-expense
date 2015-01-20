@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -39,7 +40,19 @@ public class DatePickerController {
 				showDialog();
 			}
 		});
+	    
+	    updateTextView();
     }
+	
+	public void setDate(int year, int month, int day) {
+		calendar.set(year, month, day);
+		updateTextView();
+	}
+	
+	public void updateTextView() {
+		String dateString = DateFormat.getMediumDateFormat(textView.getContext()).format(calendar.getTime());
+		textView.setText(dateString);
+	}
 	
 	private void showDialog() {
 		cancelled = true;
@@ -64,14 +77,16 @@ public class DatePickerController {
 		// Multi-button setup based on code from:
 		// http://stackoverflow.com/a/21529892
 		// Accessed on 19/01/15
-		dialog.setButton(Dialog.BUTTON_POSITIVE, "Set", new DialogInterface.OnClickListener() {
+		Context ctxt = textView.getContext();
+		
+		dialog.setButton(Dialog.BUTTON_POSITIVE, ctxt.getString(R.string.action_set), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				cancelled = false;
 			}
 		});
 		
-		dialog.setButton(Dialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+		dialog.setButton(Dialog.BUTTON_NEGATIVE, ctxt.getString(R.string.action_cancel), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				cancelled = true;
@@ -79,12 +94,5 @@ public class DatePickerController {
 		});
 		
 		dialog.show();
-	}
-	
-	public void setDate(int year, int month, int day) {
-		calendar.set(year, month, day);
-		
-		String dateString = DateFormat.getMediumDateFormat(textView.getContext()).format(calendar.getTime());
-		textView.setText(dateString);
 	}
 }
