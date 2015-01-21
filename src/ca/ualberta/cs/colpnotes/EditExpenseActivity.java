@@ -7,6 +7,9 @@ import android.view.Menu;
 import android.view.View;
 
 public class EditExpenseActivity extends Activity {
+	public static final String CLAIM_INDEX = "CLAIM_INDEX";
+	public static final String EXPENSE_INDEX = "EXPENSE_INDEX";
+	
 	private View actionBarView;
 	
     @Override
