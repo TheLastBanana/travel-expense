@@ -66,7 +66,7 @@ public class DatePickerController {
 						
 						if (!cancelled) {
 							setDate(year, monthOfYear, dayOfMonth);
-							listener.onDateSet(view, year, monthOfYear, dayOfMonth);
+							if (listener != null) listener.onDateSet(view, year, monthOfYear, dayOfMonth);
 						}
 					}
 				},
