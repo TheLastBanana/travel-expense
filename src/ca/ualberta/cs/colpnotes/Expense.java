@@ -14,11 +14,11 @@ public class Expense implements Serializable {
 	 */
     private static final long serialVersionUID = -1959800553757616009L;
     
-	private Calendar date;
-	private ExpenseCategory category;
-	private String description;
-	private BigDecimal amount;
-	private Currency currency;
+	private Calendar date = Calendar.getInstance();
+	private ExpenseCategory category = ExpenseCategory.ACCOMMODATION;
+	private String description = "";
+	private BigDecimal amount = new BigDecimal(0.0);
+	private Currency currency = Currency.getInstance("USD");
 	
 	public Calendar getDate() {
 		return date;
