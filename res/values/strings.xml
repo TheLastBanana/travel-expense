@@ -31,10 +31,19 @@
     <string name="to_label">TO</string>
     <string name="list_expenses_label">Expenses</string>
     <string name="edit_expense_label">Edit expense</string>
+    
     <string name="in_progress_label">in progress</string>
     <string name="submitted_label">submitted</string>
     <string name="returned_label">returned</string>
     <string name="approved_label">approved</string>
+    <string name="air_fare_label">Air fare</string>
+	<string name="ground_transport_label">Ground transport</string>
+	<string name="vehicle_rental_label">Vehicle rental</string>
+	<string name="fuel_label">Fuel</string>
+	<string name="parking_label">Parking</string>
+	<string name="registration_label">Registration</string>
+	<string name="accommodation_label">Accommodation</string>
+	<string name="meal_label">Meal</string>
     
     <string name="discard_message">Are you sure you want to discard these changes?</string>
 
