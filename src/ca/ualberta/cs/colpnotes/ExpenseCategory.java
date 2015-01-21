@@ -36,12 +36,12 @@ public enum ExpenseCategory {
 	
 	// Returns the ID of the string resource to use
 	// Throws RuntimeException!
-	public static int getNameID(ClaimStatus claimStatus)
+	public static int getNameID(ExpenseCategory expenseCategory)
 	{
-		if (!nameIDs.containsKey(claimStatus)) {
+		if (!nameIDs.containsKey(expenseCategory)) {
 			throw new RuntimeException("Missing name ID for this expense category!");
 		}
 		
-		return nameIDs.get(claimStatus);
+		return nameIDs.get(expenseCategory);
 	}
 }
