@@ -1,5 +1,6 @@
 package ca.ualberta.cs.colpnotes;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Currency;
@@ -7,7 +8,12 @@ import java.util.Currency;
 /*
  * Holds information about a single expense.
  */
-public class Expense {
+public class Expense implements Serializable {
+	/**
+	 * Generated ID
+	 */
+    private static final long serialVersionUID = -1959800553757616009L;
+    
 	private Calendar date;
 	private ExpenseCategory category;
 	private String description;

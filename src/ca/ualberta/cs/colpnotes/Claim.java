@@ -1,6 +1,7 @@
 package ca.ualberta.cs.colpnotes;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /*
@@ -19,6 +20,7 @@ public class Claim implements Serializable {
 	private ClaimStatus status = ClaimStatus.IN_PROGRESS;
 	private Calendar from = Calendar.getInstance();
 	private Calendar to = Calendar.getInstance();
+	private ArrayList<Expense> expenses = new ArrayList<Expense>();
 
 	public String getName() {
 		return name;
@@ -66,5 +68,9 @@ public class Claim implements Serializable {
 
 	public void setStatus(ClaimStatus status) {
 		this.status = status;
+	}
+
+	public ArrayList<Expense> getExpenses() {
+		return expenses;
 	}
 }
