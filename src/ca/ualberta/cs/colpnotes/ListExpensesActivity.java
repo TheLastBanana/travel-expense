@@ -92,6 +92,10 @@ public class ListExpensesActivity extends Activity {
 		case R.id.action_edit_claim:
 			editClaim();
 			return true;
+			
+		case R.id.action_add_expense:
+			addExpense();
+			return true;
 	    	
 		default:
 			break;
@@ -106,6 +110,16 @@ public class ListExpensesActivity extends Activity {
 		
     	Intent intent = new Intent(ListExpensesActivity.this, EditClaimActivity.class);
     	intent.putExtra(EditClaimActivity.CLAIM_INDEX, claimIndex);
+    	
+    	startActivity(intent);
+	}
+	
+	// Switch to the edit expense activity with a new expense
+	private void addExpense() {
+		int claimIndex = ClaimListController.getClaimList().indexOf(claim);
+		
+    	Intent intent = new Intent(ListExpensesActivity.this, EditExpenseActivity.class);
+    	intent.putExtra(EditExpenseActivity.CLAIM_INDEX, claimIndex);
     	
     	startActivity(intent);
 	}

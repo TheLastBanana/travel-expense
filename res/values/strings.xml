@@ -26,6 +26,8 @@
     <string name="action_set">Set</string>
     <string name="action_discard">Discard</string>
     <string name="edit_claim_label">Edit claim</string>
+    <string name="expense_category_prompt">Set category</string>
+    <string name="expense_currency_prompt">Set currency</string>
     
     <string name="from_label">FROM</string>
     <string name="to_label">TO</string>
@@ -36,15 +38,18 @@
     <string name="submitted_label">submitted</string>
     <string name="returned_label">returned</string>
     <string name="approved_label">approved</string>
-    <string name="air_fare_label">Air fare</string>
-	<string name="ground_transport_label">Ground transport</string>
-	<string name="vehicle_rental_label">Vehicle rental</string>
-	<string name="fuel_label">Fuel</string>
-	<string name="parking_label">Parking</string>
-	<string name="registration_label">Registration</string>
-	<string name="accommodation_label">Accommodation</string>
-	<string name="meal_label">Meal</string>
     
     <string name="discard_message">Are you sure you want to discard these changes?</string>
+    
+    <string-array name="expense_categories">
+	    <item>Air fare</item>
+		<item>Ground transport</item>
+		<item>Vehicle rental</item>
+		<item>Fuel</item>
+		<item>Parking</item>
+		<item>Registration</item>
+		<item>Accommodation</item>
+		<item>Meal</item>
+    </string-array>
 
 </resources>

@@ -14,11 +14,29 @@ public class Expense implements Serializable {
 	 */
     private static final long serialVersionUID = -1959800553757616009L;
     
-	private Calendar date = Calendar.getInstance();
-	private ExpenseCategory category = ExpenseCategory.ACCOMMODATION;
-	private String description = "";
-	private BigDecimal amount = new BigDecimal(0.0);
-	private Currency currency = Currency.getInstance("USD");
+	private Calendar date;
+	private String category;
+	private String description;
+	private BigDecimal amount;
+	private Currency currency;
+	
+	public Expense() {
+		setDate(Calendar.getInstance());
+		setCategory(category);
+		setDescription("");
+		setAmount(new BigDecimal(0));
+		setCurrency(Currency.getInstance("USD"));
+	}
+	
+	public Expense(Expense e) {
+		setDate((Calendar) e.date.clone());
+		setCategory(new String(e.category));
+		setDescription(new String(e.category));
+		setAmount(new BigDecimal(e.amount.toString()));
+		
+		// Don't need to deep copy as only one exists per currency type
+		setCurrency(e.currency);
+	}
 	
 	public Calendar getDate() {
 		return date;
@@ -26,10 +44,10 @@ public class Expense implements Serializable {
 	public void setDate(Calendar date) {
 		this.date = date;
 	}
-	public ExpenseCategory getCategory() {
+	public String getCategory() {
 		return category;
 	}
-	public void setCategory(ExpenseCategory category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 	public String getDescription() {
@@ -43,11 +61,22 @@ public class Expense implements Serializable {
 	}
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
+		
+		updateAmountScale();
 	}
 	public Currency getCurrency() {
 		return currency;
 	}
 	public void setCurrency(Currency currency) {
 		this.currency = currency;
+		
+		updateAmountScale();
+	}
+	
+	private void updateAmountScale() {
+		if (amount == null) return;
+		if (currency == null) return;
+		
+		amount = amount.setScale(currency.getDefaultFractionDigits());
 	}
 }
