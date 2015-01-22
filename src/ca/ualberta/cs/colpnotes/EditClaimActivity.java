@@ -107,7 +107,7 @@ public class EditClaimActivity extends Activity {
     	toDate = (Calendar) claim.getTo().clone();
         
         // Set up the date fields
-        TextView fromText = (TextView) findViewById(R.id.claim_from_date_edittext);
+        TextView fromText = (TextView) findViewById(R.id.claim_from_date_textview);
         fromPicker = new DatePickerController(fromText, fromDate,
         		new android.app.DatePickerDialog.OnDateSetListener() {
 					@Override
@@ -121,7 +121,7 @@ public class EditClaimActivity extends Activity {
 					}
 				});
         
-        TextView toText = (TextView) findViewById(R.id.claim_to_date_edittext);
+        TextView toText = (TextView) findViewById(R.id.claim_to_date_textview);
         toPicker = new DatePickerController(toText, toDate,
         		new android.app.DatePickerDialog.OnDateSetListener() {
 					@Override
