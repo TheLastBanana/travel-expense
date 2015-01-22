@@ -73,6 +73,7 @@ public class Expense implements Serializable {
 		updateAmountScale();
 	}
 	
+	// Updates the scale of the amount based on the currency
 	private void updateAmountScale() {
 		if (amount == null) return;
 		if (currency == null) return;
