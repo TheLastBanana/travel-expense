@@ -100,7 +100,7 @@ public class EditExpenseActivity extends Activity {
         }
         
         // Set up the date field
-        TextView fromText = (TextView) findViewById(R.id.expense_date_edittext);
+        TextView fromText = (TextView) findViewById(R.id.expense_date_textview);
         datePicker = new DatePickerController(fromText, tempExpense.getDate(), null);
         
     	// Populate fields
