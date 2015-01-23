@@ -1,8 +1,10 @@
 package ca.ualberta.cs.colpnotes;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.content.Context;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,25 +35,23 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
 	    
 	    if (convertView == null) {
 	    	LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	    	view = inflater.inflate(R.layout.claim_list_item, null);
+	    	view = inflater.inflate(R.layout.expense_list_item, null);
 	    }
 	    
 	    Expense expense = expenses.get(position);
 	    
-	    // Set expense description
-	    TextView descText = (TextView) view.findViewById(R.id.description_textview);
-	    if (descText != null) {
-	    	descText.setText(expense.getDescription());
+	    // Set expense category
+	    TextView mainTextView = (TextView) view.findViewById(R.id.main_textview);
+	    if (mainTextView != null) {
+	    	mainTextView.setText(expense.getAmount().toString() + " " + expense.getCurrency().getCurrencyCode());
 	    }
 	    
-	    // Set claim status
-	    //
-	    // Referenced for title case:
-	    // http://stackoverflow.com/questions/12656941/format-name-in-title-case-java-help-please
-	    // on 17/01/15
-	    TextView statusText = (TextView) view.findViewById(R.id.amount_textview);
-	    if (statusText != null) {
-	    	statusText.setText(expense.getAmount().toString());
+	    // Set expense cost
+	    TextView secondaryTextView = (TextView) view.findViewById(R.id.secondary_textview);
+	    if (secondaryTextView != null) {
+	    	Calendar calendar = expense.getDate();
+	    	String dateString = DateFormat.getMediumDateFormat(getContext()).format(calendar.getTime());
+	    	secondaryTextView.setText(dateString + " - " + expense.getCategory());
 	    }
 	    
 	    

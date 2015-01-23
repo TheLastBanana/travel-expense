@@ -25,7 +25,7 @@ public class ListExpensesActivity extends Activity {
 	public static final String CLAIM_INDEX = "CLAIM_INDEX";
 	
 	private Claim claim = null;
-	ListAdapter expenseListAdapter = null;
+	ExpenseAdapter expenseListAdapter = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +72,13 @@ public class ListExpensesActivity extends Activity {
 		    	startActivity(intent);
             }
 		});
+	}
+	
+	@Override
+	protected void onResume() {
+    	if (expenseListAdapter != null) expenseListAdapter.notifyDataSetChanged();
+    	
+        super.onResume();
 	}
 
 	@Override

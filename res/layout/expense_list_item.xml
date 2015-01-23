@@ -24,7 +24,7 @@
 >
     
 	<TextView
-	    android:id="@+id/description_textview"
+	    android:id="@+id/main_textview"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
@@ -32,11 +32,11 @@
 	    android:textAppearance="?android:attr/textAppearanceListItem" />
 		
 	<TextView
-	    android:id="@+id/amount_textview"
+	    android:id="@+id/secondary_textview"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:layout_alignStart="@+id/name_textview"
-	    android:layout_below="@+id/description_textview"
+	    android:layout_alignStart="@+id/main_textview"
+	    android:layout_below="@+id/main_textview"
 	    android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </TwoLineListItem>
