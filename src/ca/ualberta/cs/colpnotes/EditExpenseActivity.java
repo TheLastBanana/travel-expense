@@ -136,8 +136,8 @@ public class EditExpenseActivity extends Activity {
         }
         
         // Set up the date field as it needs a special controller
-        TextView fromText = (TextView) findViewById(R.id.expense_date_textview);
-        datePicker = new DatePickerController(fromText, tempExpense.getDate(), null);
+        TextView dateText = (TextView) findViewById(R.id.expense_date_textview);
+        datePicker = new DatePickerController(dateText, tempExpense.getDate(), claim.getFrom(), claim.getTo(), null);
         
     	// Get other fields
         amountEditText = (EditText) findViewById(R.id.expense_amount_edittext);

@@ -108,7 +108,7 @@ public class EditClaimActivity extends Activity {
         
         // Set up the date fields
         TextView fromText = (TextView) findViewById(R.id.claim_from_date_textview);
-        fromPicker = new DatePickerController(fromText, fromDate,
+        fromPicker = new DatePickerController(fromText, fromDate, null, null,
         		new android.app.DatePickerDialog.OnDateSetListener() {
 					@Override
 					public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -122,7 +122,7 @@ public class EditClaimActivity extends Activity {
 				});
         
         TextView toText = (TextView) findViewById(R.id.claim_to_date_textview);
-        toPicker = new DatePickerController(toText, toDate,
+        toPicker = new DatePickerController(toText, toDate, null, null,
         		new android.app.DatePickerDialog.OnDateSetListener() {
 					@Override
 					public void onDateSet(DatePicker view, int year, int monthOfYear,

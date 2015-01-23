@@ -19,6 +19,8 @@ import android.widget.TextView;
 public class DatePickerController {
 	private TextView textView;
 	private Calendar calendar;
+	private Calendar minDate;
+	private Calendar maxDate;
 	private DatePickerDialog.OnDateSetListener listener;
 	private boolean cancelled = false;
 	
@@ -26,12 +28,17 @@ public class DatePickerController {
 	 * Construct the DatePickerController.
 	 * @param textView	The TextView to show the date in.
 	 * @param calendar	The Calendar to store the selected date in.
+	 * @param minDate	The minimum date to be selected, or null.
+	 * @param maxDate	The maximum date to be selected, or null.
 	 * @param listener	An additional listener for when the date is set (or null for no listener).
 	 */
-	public DatePickerController(TextView textView, Calendar calendar, DatePickerDialog.OnDateSetListener listener) {
+	public DatePickerController(TextView textView, Calendar calendar, Calendar minDate, Calendar maxDate,
+			DatePickerDialog.OnDateSetListener listener) {
 	    this.textView = textView;
 	    this.calendar = calendar;
 	    this.listener = listener;
+	    this.minDate = minDate;
+	    this.maxDate = maxDate;
 	    
 	    // Show dialog on click
 	    textView.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +51,14 @@ public class DatePickerController {
 	    updateTextView();
     }
 	
+	public TextView getTextView() {
+		return textView;
+	}
+
+	public Calendar getCalendar() {
+		return calendar;
+	}
+
 	public void setDate(int year, int month, int day) {
 		calendar.set(year, month, day);
 		updateTextView();
@@ -73,6 +88,10 @@ public class DatePickerController {
 				this.calendar.get(Calendar.YEAR),
 				this.calendar.get(Calendar.MONTH),
 				this.calendar.get(Calendar.DAY_OF_MONTH));
+		
+		DatePicker picker = dialog.getDatePicker();
+		if (minDate != null) picker.setMinDate(minDate.getTimeInMillis());
+		if (maxDate != null) picker.setMaxDate(maxDate.getTimeInMillis());
 		
 		// Multi-button setup based on code from:
 		// http://stackoverflow.com/a/21529892
