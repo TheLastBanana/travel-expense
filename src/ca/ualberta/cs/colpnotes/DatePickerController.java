@@ -15,6 +15,9 @@ import android.widget.TextView;
  * A controller between a TextView and a Calendar which allows the user
  * to set the Calendar date in a dialog and displays the date formatted
  * nicely in the TextView.
+ * 
+ * This class helps to avoid boilerplate code by automatically updating
+ * the given Calendar and setting up the textView to show the dialog.
  */
 public class DatePickerController {
 	private TextView textView;
@@ -27,7 +30,7 @@ public class DatePickerController {
 	/**
 	 * Construct the DatePickerController.
 	 * @param textView	The TextView to show the date in.
-	 * @param calendar	The Calendar to store the selected date in.
+	 * @param calendar	The Calendar to store the selected date in. It will be updated automatically.
 	 * @param minDate	The minimum date to be selected, or null.
 	 * @param maxDate	The maximum date to be selected, or null.
 	 * @param listener	An additional listener for when the date is set (or null for no listener).
