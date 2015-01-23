@@ -57,7 +57,7 @@ public class EditExpenseActivity extends Activity {
         actionBar.getCustomView().findViewById(R.id.accept_expense_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-	        	//saveChanges();
+	        	saveChanges();
 	        	finish();
 			}
 		});
@@ -230,5 +230,19 @@ public class EditExpenseActivity extends Activity {
 					}
 			   });
 		builder.create().show();
+	}
+	
+	// Save changes from the temporary expense to the actual expense
+	// If necessary, create a new expense in the claim
+	private void saveChanges() {
+		// Create the new expense to the claim
+		if (expense == null) {
+			expense = new Expense(tempExpense);
+			claim.getExpenses().add(expense);
+		
+		// Expense already exists
+		} else {
+			expense.copyFrom(tempExpense);
+		}
 	}
 }

@@ -29,9 +29,16 @@ public class Expense implements Serializable {
 	}
 	
 	public Expense(Expense e) {
+		copyFrom(e);
+	}
+	
+	/*
+	 * Copies all attributes from the given expense.
+	 */
+	public void copyFrom(Expense e) {
 		setDate((Calendar) e.date.clone());
 		setCategory(new String(e.category));
-		setDescription(new String(e.category));
+		setDescription(new String(e.description));
 		setAmount(new BigDecimal(e.amount.toString()));
 		
 		// Don't need to deep copy as only one exists per currency type
