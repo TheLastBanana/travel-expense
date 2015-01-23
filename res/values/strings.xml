@@ -43,14 +43,14 @@
     <string name="amount_format_error">Incorrect format!</string>
     
     <string-array name="expense_categories">
+		<item>Accommodation</item>
 	    <item>Air fare</item>
-		<item>Ground transport</item>
-		<item>Vehicle rental</item>
 		<item>Fuel</item>
+		<item>Ground transport</item>
+		<item>Meal</item>
 		<item>Parking</item>
 		<item>Registration</item>
-		<item>Accommodation</item>
-		<item>Meal</item>
+		<item>Vehicle rental</item>
     </string-array>
 
 </resources>
