@@ -78,6 +78,6 @@ public class Expense implements Serializable {
 		if (amount == null) return;
 		if (currency == null) return;
 		
-		amount = amount.setScale(currency.getDefaultFractionDigits());
+		amount = amount.setScale(currency.getDefaultFractionDigits(), BigDecimal.ROUND_DOWN);
 	}
 }
