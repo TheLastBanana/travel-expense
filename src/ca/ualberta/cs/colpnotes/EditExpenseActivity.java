@@ -1,20 +1,19 @@
 package ca.ualberta.cs.colpnotes;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
+import java.math.BigDecimal;
 import java.util.Currency;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -36,7 +35,12 @@ public class EditExpenseActivity extends Activity {
 	private Claim claim = null;
 	private Expense expense = null;		// This is the original expense
 	private Expense tempExpense = null;	// This will be copied back to expense when changes are saved
+	
 	private DatePickerController datePicker = null;
+	private Spinner categorySpinner = null;
+	private Spinner currencySpinner = null;
+	private EditText amountEditText = null;
+	private TextView descriptionEditText = null;
 	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,7 +65,7 @@ public class EditExpenseActivity extends Activity {
         		R.array.expense_categories,
         		android.R.layout.simple_spinner_item);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner categorySpinner = (Spinner) findViewById(R.id.expense_category_spinner);
+        categorySpinner = (Spinner) findViewById(R.id.expense_category_spinner);
         categorySpinner.setAdapter(categoryAdapter);
         
         // Populate currency spinner
@@ -70,7 +74,7 @@ public class EditExpenseActivity extends Activity {
         currencyAdapter.addAll(CurrencyHelper.getAllCurrencies());
         currencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         
-        Spinner currencySpinner = (Spinner) findViewById(R.id.expense_currency_spinner);
+        currencySpinner = (Spinner) findViewById(R.id.expense_currency_spinner);
         currencySpinner.setAdapter(currencyAdapter);
 		
 		// Get the claim
@@ -94,26 +98,86 @@ public class EditExpenseActivity extends Activity {
         if (expense == null) {
         	tempExpense = new Expense();
         	
-    	// Existing expense, populate fields
+    	// Existing expense so make a copy of it
         } else {
         	tempExpense = new Expense(expense);
         }
         
-        // Set up the date field
+        // Set up the date field as it needs a special controller
         TextView fromText = (TextView) findViewById(R.id.expense_date_textview);
         datePicker = new DatePickerController(fromText, tempExpense.getDate(), null);
         
-    	// Populate fields
-        updateAmountView();
+    	// Get other fields
+        amountEditText = (EditText) findViewById(R.id.expense_amount_edittext);
+        descriptionEditText = (TextView) findViewById(R.id.expense_description_edittext);
+        
+        // Set listener
+        categorySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+			@Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                    int position, long id) {
+				
+	            tempExpense.setCategory(categorySpinner.getSelectedItem().toString());
+            }
+
+			@Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+		});
+        
+        currencySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+			@Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                    int position, long id) {
+	            
+				tempExpense.setCurrency((Currency) currencySpinner.getSelectedItem());
+            }
+
+			@Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+		});
+        
+        amountEditText.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				try {
+					tempExpense.setAmount(new BigDecimal(s.toString()));
+				}
+				catch (NumberFormatException e) {
+					amountFormatError();
+				}
+			}
+		});
+        
+        descriptionEditText.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				tempExpense.setDescription(s.toString());
+			}
+		});
+        
+        // Populate fields
         categorySpinner.setSelection(categoryAdapter.getPosition(tempExpense.getCategory()));
         currencySpinner.setSelection(currencyAdapter.getPosition(tempExpense.getCurrency()));
-		((TextView) findViewById(R.id.expense_description_edittext)).setText(tempExpense.getDescription());
+		descriptionEditText.setText(tempExpense.getDescription());
+		amountEditText.setText(tempExpense.getAmount().toPlainString());
 	}
-
+	
 	/*
-	 * If the currency changes, the amount scale might as well, so this needs to be called.
+	 * Displays a format error for the amount field
 	 */
-	private void updateAmountView() {
-		((TextView) findViewById(R.id.expense_amount_edittext)).setText(tempExpense.getAmount().toString());
+	private void amountFormatError() {
+		amountEditText.setError(getString(R.string.amount_format_error));
 	}
 }
