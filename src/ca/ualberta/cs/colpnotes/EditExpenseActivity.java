@@ -5,10 +5,13 @@ import java.util.Currency;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -48,11 +51,40 @@ public class EditExpenseActivity extends Activity {
         ActionBar actionBar = getActionBar();
         actionBar.setCustomView(actionBarView);
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        //actionBar.setDisplayHomeAsUpEnabled(true);
         getMenuInflater().inflate(R.menu.edit_expense, menu);
+        
+        // Handle onClick for custom accept button
+        actionBar.getCustomView().findViewById(R.id.accept_expense_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+	        	//saveChanges();
+	        	finish();
+			}
+		});
         
         return true;
     }
+	
+	@Override
+	public void onBackPressed() {
+		discardAlert();
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        
+        switch (id) {
+        case R.id.action_discard_expense_changes:
+        	discardAlert();
+        	return true;
+        	
+    	default:
+    		break;
+        }
+        
+	    return super.onOptionsItemSelected(item);
+	}
 
 	/** Called when the activity is first created. */
 	@Override
@@ -179,5 +211,23 @@ public class EditExpenseActivity extends Activity {
 	 */
 	private void amountFormatError() {
 		amountEditText.setError(getString(R.string.amount_format_error));
+	}
+	
+	// Ask before discarding changes
+	private void discardAlert() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(R.string.discard_message)
+			   .setPositiveButton(R.string.action_discard, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						finish();
+					}
+			   })
+			   .setNegativeButton(R.string.action_cancel, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+					}
+			   });
+		builder.create().show();
 	}
 }
