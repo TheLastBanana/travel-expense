@@ -35,7 +35,6 @@
         android:layout_marginBottom="6dp"
         android:layout_marginTop="6dp"
         android:gravity="center_horizontal"
-        android:text="Total (in progress):\n10 USD, 4 CAD, 150 YEN"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

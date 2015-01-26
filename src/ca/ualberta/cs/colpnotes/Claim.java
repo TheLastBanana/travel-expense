@@ -1,8 +1,11 @@
 package ca.ualberta.cs.colpnotes;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Currency;
+import java.util.HashMap;
 
 /*
  * Holds information about a claim, including its corresponding Expenses.
@@ -72,5 +75,32 @@ public class Claim implements Serializable {
 
 	public ArrayList<Expense> getExpenses() {
 		return expenses;
+	}
+	
+	/**
+	 * Get the totals for each currency type in this claim's expenses.
+	 * @return A map from Currency to total amount 
+	 */
+	public HashMap<Currency, BigDecimal> getTotals() {
+		HashMap<Currency, BigDecimal> totals = new HashMap<Currency, BigDecimal>();
+		
+		// Find the amount for each currency and tally
+		for (Expense expense : getExpenses()) {
+			Currency currency = expense.getCurrency();
+			BigDecimal amount = totals.get(currency);
+			
+			// New currency
+			if (amount == null) {
+				amount = new BigDecimal(expense.getAmount().toString());
+				
+			// We already have a total
+			} else {
+				amount = amount.add(expense.getAmount());
+			}
+			
+			totals.put(currency, amount);
+		}
+		
+		return totals;
 	}
 }

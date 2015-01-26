@@ -1,9 +1,14 @@
 package ca.ualberta.cs.colpnotes;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Currency;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint.Join;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 
 /*
  * Effectively acts as a gateway to all claim-editing functionality
@@ -76,7 +82,11 @@ public class ListExpensesActivity extends Activity {
 	
 	@Override
 	protected void onResume() {
+		// Update list
     	if (expenseListAdapter != null) expenseListAdapter.notifyDataSetChanged();
+    	
+    	// Update total
+    	updateTotal();
     	
         super.onResume();
 	}
@@ -129,5 +139,38 @@ public class ListExpensesActivity extends Activity {
     	intent.putExtra(EditExpenseActivity.CLAIM_INDEX, claimIndex);
     	
     	startActivity(intent);
+	}
+	
+	// Update the total
+	private void updateTotal() {
+		// Map from currency to amount
+		HashMap<Currency, BigDecimal> totals = claim.getTotals();
+		
+		// Build the string
+		StringBuilder builder = new StringBuilder();
+		builder.append(getString(R.string.total_label) + " (");
+		builder.append(getString(ClaimStatus.getNameID(claim.getStatus())));
+		builder.append("):\n");
+		
+		if (claim.getExpenses().size() == 0) {
+			builder.append(getString(R.string.na_label));
+		} else {
+			// Create strings for each amount and separate with commas
+			for (Currency currency : totals.keySet()) {
+				BigDecimal amount = totals.get(currency);
+				
+				builder.append(amount.toPlainString() +
+							   " " +
+							   currency.getCurrencyCode() +
+							   ", ");
+			}
+			
+			// Remove last comma
+			builder.delete(builder.length() - 2, builder.length());
+		}
+		
+		// Update view
+		TextView totalView = (TextView) findViewById(R.id.expense_total_textview);
+		totalView.setText(builder.toString());
 	}
 }

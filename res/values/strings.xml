@@ -33,6 +33,8 @@
     <string name="to_label">TO</string>
     <string name="list_expenses_label">Expenses</string>
     <string name="edit_expense_label">Edit expense</string>
+    <string name="total_label">Total</string>
+    <string name="na_label">N/A</string>
     
     <string name="in_progress_label">in progress</string>
     <string name="submitted_label">submitted</string>
