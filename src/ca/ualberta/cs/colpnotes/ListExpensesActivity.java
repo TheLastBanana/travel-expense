@@ -1,22 +1,15 @@
 package ca.ualberta.cs.colpnotes;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Currency;
-import java.util.HashMap;
-import java.util.Map;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Paint.Join;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
@@ -32,8 +25,9 @@ import android.widget.TextView;
 public class ListExpensesActivity extends Activity {
 	public static final String CLAIM_INDEX = "CLAIM_INDEX";
 	
+	private Menu menu = null;
 	private Claim claim = null;
-	ExpenseAdapter expenseListAdapter = null;
+	private ExpenseAdapter expenseListAdapter = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +79,8 @@ public class ListExpensesActivity extends Activity {
 		// Update list
     	if (expenseListAdapter != null) expenseListAdapter.notifyDataSetChanged();
     	
-    	// Update total
-    	updateTotal();
+    	// Update status and total
+    	updateStatus();
     	
     	setTitle(claim.getName());
     	
@@ -97,6 +91,10 @@ public class ListExpensesActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.list_expenses, menu);
+		this.menu = menu;
+		
+		updateStatus();
+		
 		return true;
 	}
 
@@ -119,6 +117,18 @@ public class ListExpensesActivity extends Activity {
 		case R.id.action_delete_claim:
 			deleteAlert();
 			return true;
+			
+		case R.id.action_submit_claim:
+			submitClaim();
+			return true;
+			
+		case R.id.action_return_claim:
+			returnClaim();
+			return true;
+			
+		case R.id.action_approve_claim:
+			approveAlert();
+			return true;
 	    	
 		default:
 			break;
@@ -127,7 +137,9 @@ public class ListExpensesActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	// Switch to the edit claim activity
+	/**
+	 * Switch to the edit claim activity for this claim.
+	 */
 	private void editClaim() {
 		int claimIndex = ClaimListController.getClaimList().indexOf(claim);
 		
@@ -137,7 +149,9 @@ public class ListExpensesActivity extends Activity {
     	startActivity(intent);
 	}
 	
-	// Switch to the edit expense activity with a new expense
+	/**
+	 * Switch to the edit expense activity with a new expense.
+	 */
 	private void addExpense() {
 		int claimIndex = ClaimListController.getClaimList().indexOf(claim);
 		
@@ -145,6 +159,53 @@ public class ListExpensesActivity extends Activity {
     	intent.putExtra(EditExpenseActivity.CLAIM_INDEX, claimIndex);
     	
     	startActivity(intent);
+	}
+	
+	/**
+	 * Change the claim status to submitted.
+	 */
+	private void submitClaim() {
+		claim.setStatus(ClaimStatus.SUBMITTED);
+		ClaimListController.save();
+		updateStatus();
+	}
+	
+	/**
+	 * Change to the claim status to returned.
+	 */
+	private void returnClaim() {
+		claim.setStatus(ClaimStatus.RETURNED);
+		ClaimListController.save();
+		updateStatus();
+	}
+	
+	/**
+	 * Change to the claim status to approved.
+	 */
+	private void approveClaim() {
+		claim.setStatus(ClaimStatus.APPROVED);
+		ClaimListController.save();
+		updateStatus();
+	}
+	
+	/**
+	 * Ask if the user wants to approve the claim.
+	 */
+	private void approveAlert() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(R.string.approve_claim_message)
+			   .setPositiveButton(R.string.action_approve_claim, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						approveClaim();
+					}
+			   })
+			   .setNegativeButton(R.string.action_cancel, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+					}
+			   });
+		builder.create().show();
 	}
 	
 	/**
@@ -178,7 +239,9 @@ public class ListExpensesActivity extends Activity {
 		finish();
 	}
 	
-	// Update the total
+	/**
+	 * Updates the total text at the bottom of the list.
+	 */
 	private void updateTotal() {
 		// Update view
 		TextView totalView = (TextView) findViewById(R.id.expense_total_textview);
@@ -191,5 +254,45 @@ public class ListExpensesActivity extends Activity {
 		builder.append(ClaimHelper.getTotalString(claim, this));
 		
 		totalView.setText(builder.toString());
+	}
+	
+	/**
+	 * Updates button states and text based on new claim status.
+	 * Menu must exist first or this will not run.
+	 */
+	private void updateStatus() {
+		if (menu == null) return;
+		
+		updateTotal();
+		
+		switch (claim.getStatus()) {
+		// Can submit; can edit
+		case IN_PROGRESS:
+		case RETURNED:
+			menu.findItem(R.id.action_submit_claim).setVisible(true);
+			menu.findItem(R.id.action_return_claim).setVisible(false);
+			menu.findItem(R.id.action_approve_claim).setVisible(false);
+			menu.findItem(R.id.action_edit_claim).setVisible(true);
+			menu.findItem(R.id.action_add_expense).setVisible(true);
+			break;
+		
+		// Can return or approve; can't edit
+		case SUBMITTED:
+			menu.findItem(R.id.action_submit_claim).setVisible(false);
+			menu.findItem(R.id.action_return_claim).setVisible(true);
+			menu.findItem(R.id.action_approve_claim).setVisible(true);
+			menu.findItem(R.id.action_edit_claim).setVisible(false);
+			menu.findItem(R.id.action_add_expense).setVisible(false);
+			break;
+		
+		// Can't change status; can't edit
+		case APPROVED:
+			menu.findItem(R.id.action_submit_claim).setVisible(false);
+			menu.findItem(R.id.action_return_claim).setVisible(false);
+			menu.findItem(R.id.action_approve_claim).setVisible(false);
+			menu.findItem(R.id.action_edit_claim).setVisible(false);
+			menu.findItem(R.id.action_add_expense).setVisible(false);
+			break;
+		}
 	}
 }
