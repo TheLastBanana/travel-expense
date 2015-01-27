@@ -276,22 +276,31 @@ public class ListExpensesActivity extends Activity {
 		case IN_PROGRESS:
 		case RETURNED:
 			menu.findItem(R.id.action_submit_claim).setVisible(true);
+			menu.findItem(R.id.action_submit_claim).setEnabled(true);
 			menu.findItem(R.id.action_return_claim).setVisible(false);
+			menu.findItem(R.id.action_return_claim).setEnabled(false);
 			menu.findItem(R.id.action_approve_claim).setVisible(false);
+			menu.findItem(R.id.action_approve_claim).setEnabled(false);
 			break;
 		
 		// Can return or approve; can't edit
 		case SUBMITTED:
 			menu.findItem(R.id.action_submit_claim).setVisible(false);
+			menu.findItem(R.id.action_submit_claim).setEnabled(false);
 			menu.findItem(R.id.action_return_claim).setVisible(true);
+			menu.findItem(R.id.action_return_claim).setEnabled(true);
 			menu.findItem(R.id.action_approve_claim).setVisible(true);
+			menu.findItem(R.id.action_approve_claim).setEnabled(true);
 			break;
 		
 		// Can't change status; can't edit
 		case APPROVED:
 			menu.findItem(R.id.action_submit_claim).setVisible(false);
+			menu.findItem(R.id.action_submit_claim).setEnabled(false);
 			menu.findItem(R.id.action_return_claim).setVisible(false);
+			menu.findItem(R.id.action_return_claim).setEnabled(false);
 			menu.findItem(R.id.action_approve_claim).setVisible(false);
+			menu.findItem(R.id.action_approve_claim).setEnabled(false);
 			break;
 		}
 		
