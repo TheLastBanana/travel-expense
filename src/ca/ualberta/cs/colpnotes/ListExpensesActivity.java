@@ -1,6 +1,7 @@
 package ca.ualberta.cs.colpnotes;
 
 import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -79,12 +80,12 @@ public class ListExpensesActivity extends Activity {
 		// Update list
     	if (expenseListAdapter != null) expenseListAdapter.notifyDataSetChanged();
     	
-    	// Update status and total
-    	updateStatus();
-    	
     	setTitle(claim.getName());
     	
         super.onResume();
+    	
+    	// Update status and total
+    	if (menu != null) updateStatus();
 	}
 
 	@Override
@@ -258,10 +259,13 @@ public class ListExpensesActivity extends Activity {
 	
 	/**
 	 * Updates button states and text based on new claim status.
-	 * Menu must exist first or this will not run.
+	 * Throws an exception if the menu is null.
+	 * @throws RuntimeException
 	 */
 	private void updateStatus() {
-		if (menu == null) return;
+		if (menu == null) {
+			throw new RuntimeException("Null menu can't be updated");
+		}
 		
 		updateTotal();
 		
