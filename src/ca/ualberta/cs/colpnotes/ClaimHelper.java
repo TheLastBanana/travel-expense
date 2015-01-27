@@ -19,9 +19,6 @@ public class ClaimHelper {
 		
 		// Build the string
 		StringBuilder builder = new StringBuilder();
-		builder.append(context.getString(R.string.total_label) + " (");
-		builder.append(context.getString(ClaimStatus.getNameID(claim.getStatus())));
-		builder.append("):\n");
 		
 		// Nothing to list
 		if (claim.getExpenses().size() == 0) {

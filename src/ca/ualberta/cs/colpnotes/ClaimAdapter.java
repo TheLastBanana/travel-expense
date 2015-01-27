@@ -41,23 +41,14 @@ public class ClaimAdapter extends ArrayAdapter<Claim> {
 	    // Set claim name
 	    TextView nameText = (TextView) view.findViewById(R.id.name_textview);
 	    if (nameText != null) {
-	    	nameText.setText(claim.getName());
+	    	int stringID = ClaimStatus.getNameID(claim.getStatus());
+	    	nameText.setText(claim.getName() + " (" + getContext().getString(stringID) + ")");
 	    }
 	    
-	    // Set claim status
-	    //
-	    // Referenced for title case:
-	    // http://stackoverflow.com/questions/12656941/format-name-in-title-case-java-help-please
-	    // on 17/01/15
+	    // Set claim total
 	    TextView statusText = (TextView) view.findViewById(R.id.status_textview);
 	    if (statusText != null) {
-	    	int stringID = ClaimStatus.getNameID(claim.getStatus());
-	    	
-	    	// Set first character as capital
-	    	StringBuilder statusString = new StringBuilder(getContext().getString(stringID));
-	    	statusString.setCharAt(0, Character.toTitleCase(statusString.charAt(0)));
-	    	
-	    	statusText.setText(statusString);
+	    	statusText.setText(ClaimHelper.getTotalString(claim, getContext()));
 	    }
 	    
 	    

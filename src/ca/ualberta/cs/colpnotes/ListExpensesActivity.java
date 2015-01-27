@@ -145,6 +145,14 @@ public class ListExpensesActivity extends Activity {
 	private void updateTotal() {
 		// Update view
 		TextView totalView = (TextView) findViewById(R.id.expense_total_textview);
-		totalView.setText(ClaimHelper.getTotalString(claim, this));
+		
+		// Build the string
+		StringBuilder builder = new StringBuilder();
+		builder.append(getString(R.string.total_label) + " (");
+		builder.append(getString(ClaimStatus.getNameID(claim.getStatus())));
+		builder.append("):\n");
+		builder.append(ClaimHelper.getTotalString(claim, this));
+		
+		totalView.setText(builder.toString());
 	}
 }
