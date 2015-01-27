@@ -51,8 +51,6 @@ public class ListExpensesActivity extends Activity {
         	throw new RuntimeException("Attempted to list expenses for null claim");
         }
         
-        setTitle(claim.getName());
-        
         // Get the list of expenses
         ArrayList<Expense> expenses = claim.getExpenseList().getExpenses();
         
@@ -87,6 +85,8 @@ public class ListExpensesActivity extends Activity {
     	
     	// Update total
     	updateTotal();
+    	
+    	setTitle(claim.getName());
     	
         super.onResume();
 	}
