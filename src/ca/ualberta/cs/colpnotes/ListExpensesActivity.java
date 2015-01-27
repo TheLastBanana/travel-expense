@@ -153,14 +153,14 @@ public class ListExpensesActivity extends Activity {
 	private void deleteAlert() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(R.string.delete_claim_message)
-			   .setPositiveButton(R.string.action_cancel, new DialogInterface.OnClickListener() {
+			   .setPositiveButton(R.string.action_delete_claim, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						deleteClaim();
 						finish();
 					}
 			   })
-			   .setNegativeButton(R.string.action_delete_claim, new DialogInterface.OnClickListener() {
+			   .setNegativeButton(R.string.action_cancel, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 					}
