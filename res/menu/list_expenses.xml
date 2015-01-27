@@ -18,7 +18,7 @@
           android:orderInCategory="100"
 	      android:icon="@drawable/ic_action_email"
 	      android:title="@string/action_mail_claim"
-	      android:showAsAction="ifRoom" />
+	      android:showAsAction="never" />
     
 	<item
         android:id="@+id/action_submit_claim"
