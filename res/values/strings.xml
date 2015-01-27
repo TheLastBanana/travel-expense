@@ -19,6 +19,7 @@
     <string name="action_discard_changes">Discard changes</string>
     <string name="action_accept">Accept</string>
     <string name="action_delete_claim">Delete claim</string>
+    <string name="action_delete_expense">Delete expense</string>
     <string name="action_submit_claim">Mark as submitted</string>
     <string name="action_return_claim">Mark as returned</string>
     <string name="action_approve_claim">Mark as approved</string>

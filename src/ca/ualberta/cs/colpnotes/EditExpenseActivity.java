@@ -79,6 +79,10 @@ public class EditExpenseActivity extends Activity {
         	discardAlert();
         	return true;
         	
+        case R.id.action_delete_expense:
+        	deleteAlert();
+        	return true;
+        	
     	default:
     		break;
         }
@@ -212,6 +216,37 @@ public class EditExpenseActivity extends Activity {
 	 */
 	private void amountFormatError() {
 		amountEditText.setError(getString(R.string.amount_format_error));
+	}
+	
+	/**
+	 * Ask before deleting expense.
+	 */
+	private void deleteAlert() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(R.string.delete_expense_message)
+			   .setPositiveButton(R.string.action_delete_expense, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						deleteClaim();
+						finish();
+					}
+			   })
+			   .setNegativeButton(R.string.action_cancel, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+					}
+			   });
+		builder.create().show();
+	}
+	
+	/**
+	 * Delete the expense.
+	 */
+	private void deleteClaim() {
+		claim.getExpenseList().removeExpense(expense);
+		ClaimListController.save();
+		
+		finish();
 	}
 	
 	// Ask before discarding changes
