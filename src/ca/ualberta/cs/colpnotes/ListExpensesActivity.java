@@ -269,15 +269,15 @@ public class ListExpensesActivity extends Activity {
 		
 		updateTotal();
 		
-		switch (claim.getStatus()) {
+		ClaimStatus claimStatus = claim.getStatus();
+		
+		switch (claimStatus) {
 		// Can submit; can edit
 		case IN_PROGRESS:
 		case RETURNED:
 			menu.findItem(R.id.action_submit_claim).setVisible(true);
 			menu.findItem(R.id.action_return_claim).setVisible(false);
 			menu.findItem(R.id.action_approve_claim).setVisible(false);
-			menu.findItem(R.id.action_edit_claim).setVisible(true);
-			menu.findItem(R.id.action_add_expense).setVisible(true);
 			break;
 		
 		// Can return or approve; can't edit
@@ -285,8 +285,6 @@ public class ListExpensesActivity extends Activity {
 			menu.findItem(R.id.action_submit_claim).setVisible(false);
 			menu.findItem(R.id.action_return_claim).setVisible(true);
 			menu.findItem(R.id.action_approve_claim).setVisible(true);
-			menu.findItem(R.id.action_edit_claim).setVisible(false);
-			menu.findItem(R.id.action_add_expense).setVisible(false);
 			break;
 		
 		// Can't change status; can't edit
@@ -294,9 +292,12 @@ public class ListExpensesActivity extends Activity {
 			menu.findItem(R.id.action_submit_claim).setVisible(false);
 			menu.findItem(R.id.action_return_claim).setVisible(false);
 			menu.findItem(R.id.action_approve_claim).setVisible(false);
-			menu.findItem(R.id.action_edit_claim).setVisible(false);
-			menu.findItem(R.id.action_add_expense).setVisible(false);
 			break;
 		}
+		
+		// Enable/disable edit buttons
+		boolean editable = ClaimStatus.getEditable(claimStatus);
+		menu.findItem(R.id.action_edit_claim).setVisible(editable);
+		menu.findItem(R.id.action_add_expense).setVisible(editable);
 	}
 }
