@@ -297,7 +297,6 @@ public class ListExpensesActivity extends Activity {
 		
 		// Enable/disable edit buttons
 		boolean editable = ClaimStatus.getEditable(claimStatus);
-		menu.findItem(R.id.action_edit_claim).setVisible(editable);
 		menu.findItem(R.id.action_add_expense).setVisible(editable);
 	}
 }

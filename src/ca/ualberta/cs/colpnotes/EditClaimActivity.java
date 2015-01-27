@@ -7,13 +7,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /*
  * Lets the user modify the settings for a claim.
@@ -33,27 +33,42 @@ public class EditClaimActivity extends Activity {
 	private Calendar fromDate;
 	private Calendar toDate;
 	
-	@Override
-	public void onBackPressed() {
-		discardAlert();
-	}
-	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        actionBarView = getLayoutInflater().inflate(R.layout.menu_edit_claim, null);
-        ActionBar actionBar = getActionBar();
-        actionBar.setCustomView(actionBarView);
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getMenuInflater().inflate(R.menu.edit_claim, menu);
         
-        // Handle onClick for custom accept button
-        actionBar.getCustomView().findViewById(R.id.accept_claim_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-	        	saveChanges();
-	        	finish();
-			}
-		});
+        if (ClaimStatus.getEditable(claim.getStatus())) {
+        	// Create custom menu with accept button
+	        actionBarView = getLayoutInflater().inflate(R.layout.menu_edit_claim, null);
+	        ActionBar actionBar = getActionBar();
+	        actionBar.setCustomView(actionBarView);
+	        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+	        
+	        // Handle onClick for custom accept button
+	        actionBar.getCustomView().findViewById(R.id.accept_claim_button).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+		        	saveChanges();
+		        	finish();
+				}
+			});
+	        
+        // Not editable
+        } else {
+    	    ActionBar actionBar = getActionBar();
+    	    actionBar.setDisplayHomeAsUpEnabled(true);
+    	    
+    	    // Disable deletion
+    	    menu.findItem(R.id.action_discard_claim_changes).setEnabled(false);
+    	    menu.findItem(R.id.action_discard_claim_changes).setVisible(false);
+    	    
+    	    // Disable editable views
+    	    ((TextView) findViewById(R.id.claim_from_date_textview)).setClickable(false);
+    	    ((TextView) findViewById(R.id.claim_to_date_textview)).setClickable(false);
+    	    ((EditText) findViewById(R.id.claim_name_edittext)).setKeyListener(null);
+    	    ((EditText) findViewById(R.id.claim_destination_edittext)).setKeyListener(null);
+    	    ((EditText) findViewById(R.id.claim_reason_edittext)).setKeyListener(null);
+        }
         
         return true;
     }
@@ -67,11 +82,25 @@ public class EditClaimActivity extends Activity {
         	discardAlert();
         	return true;
         	
+        case android.R.id.home:
+        	// We're not editable if this is visible, so just go back
+        	finish();
+        	return true;
+        	
     	default:
     		break;
         }
         
 	    return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		if (ClaimStatus.getEditable(claim.getStatus())) {
+			discardAlert();
+		} else {
+			finish();
+		}
 	}
 
 	/** Called when the activity is first created. */
