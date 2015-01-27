@@ -54,7 +54,7 @@ public class ListExpensesActivity extends Activity {
         setTitle(claim.getName());
         
         // Get the list of expenses
-        ArrayList<Expense> expenses = claim.getExpenses();
+        ArrayList<Expense> expenses = claim.getExpenseList().getExpenses();
         
         // Create the adapter
         expenseListAdapter = new ExpenseAdapter(this, R.layout.expense_list_item, expenses);
@@ -69,7 +69,7 @@ public class ListExpensesActivity extends Activity {
 	            
 				Expense expense = (Expense) expenseListAdapter.getItem(position);
 				int claimIndex = ClaimListController.getClaimList().indexOf(claim);
-				int expenseIndex = claim.getExpenses().indexOf(expense);
+				int expenseIndex = claim.getExpenseList().indexOf(expense);
 				
 		    	Intent intent = new Intent(ListExpensesActivity.this, EditExpenseActivity.class);
 		    	intent.putExtra(EditExpenseActivity.CLAIM_INDEX, claimIndex);

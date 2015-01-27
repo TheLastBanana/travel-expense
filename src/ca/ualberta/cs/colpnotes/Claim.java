@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Currency;
 import java.util.HashMap;
+import java.util.Observable;
 
 /*
  * Holds information about a claim, including its corresponding Expenses.
@@ -23,7 +24,7 @@ public class Claim implements Serializable {
 	private ClaimStatus status = ClaimStatus.IN_PROGRESS;
 	private Calendar from = Calendar.getInstance();
 	private Calendar to = Calendar.getInstance();
-	private ArrayList<Expense> expenses = new ArrayList<Expense>();
+	private ExpenseList expenses = new ExpenseList();
 
 	public String getName() {
 		return name;
@@ -73,7 +74,7 @@ public class Claim implements Serializable {
 		this.status = status;
 	}
 
-	public ArrayList<Expense> getExpenses() {
+	public ExpenseList getExpenseList() {
 		return expenses;
 	}
 	
@@ -85,7 +86,7 @@ public class Claim implements Serializable {
 		HashMap<Currency, BigDecimal> totals = new HashMap<Currency, BigDecimal>();
 		
 		// Find the amount for each currency and tally
-		for (Expense expense : getExpenses()) {
+		for (Expense expense : getExpenseList().getExpenses()) {
 			Currency currency = expense.getCurrency();
 			BigDecimal amount = totals.get(currency);
 			

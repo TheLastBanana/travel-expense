@@ -170,5 +170,7 @@ public class EditClaimActivity extends Activity {
     	claim.setReason(((TextView) findViewById(R.id.claim_reason_edittext)).getText().toString());
     	claim.setFrom(fromDate);
     	claim.setTo(toDate);
+    	
+    	ClaimListController.save();
 	}
 }

@@ -117,7 +117,7 @@ public class EditExpenseActivity extends Activity {
         	
         	if (claimIndex != -1) {
         		claim = ClaimListController.getClaimList().getClaim(claimIndex);
-            	if (expenseIndex != -1) expense = claim.getExpenses().get(expenseIndex);
+            	if (expenseIndex != -1) expense = claim.getExpenseList().get(expenseIndex);
         	}
         }
         
@@ -238,11 +238,13 @@ public class EditExpenseActivity extends Activity {
 		// Create the new expense to the claim
 		if (expense == null) {
 			expense = new Expense(tempExpense);
-			claim.getExpenses().add(expense);
+			claim.getExpenseList().add(expense);
 		
 		// Expense already exists
 		} else {
 			expense.copyFrom(tempExpense);
 		}
+		
+		ClaimListController.save();
 	}
 }

@@ -21,7 +21,7 @@ public class ClaimHelper {
 		StringBuilder builder = new StringBuilder();
 		
 		// Nothing to list
-		if (claim.getExpenses().size() == 0) {
+		if (claim.getExpenseList().size() == 0) {
 			builder.append(context.getString(R.string.na_label));
 			
 		// Build the comma-separated list
