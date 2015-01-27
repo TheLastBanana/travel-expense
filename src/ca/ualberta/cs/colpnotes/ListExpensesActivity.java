@@ -143,34 +143,8 @@ public class ListExpensesActivity extends Activity {
 	
 	// Update the total
 	private void updateTotal() {
-		// Map from currency to amount
-		HashMap<Currency, BigDecimal> totals = claim.getTotals();
-		
-		// Build the string
-		StringBuilder builder = new StringBuilder();
-		builder.append(getString(R.string.total_label) + " (");
-		builder.append(getString(ClaimStatus.getNameID(claim.getStatus())));
-		builder.append("):\n");
-		
-		if (claim.getExpenses().size() == 0) {
-			builder.append(getString(R.string.na_label));
-		} else {
-			// Create strings for each amount and separate with commas
-			for (Currency currency : totals.keySet()) {
-				BigDecimal amount = totals.get(currency);
-				
-				builder.append(amount.toPlainString() +
-							   " " +
-							   currency.getCurrencyCode() +
-							   ", ");
-			}
-			
-			// Remove last comma
-			builder.delete(builder.length() - 2, builder.length());
-		}
-		
 		// Update view
 		TextView totalView = (TextView) findViewById(R.id.expense_total_textview);
-		totalView.setText(builder.toString());
+		totalView.setText(ClaimHelper.getTotalString(claim, this));
 	}
 }
