@@ -42,6 +42,8 @@
     <string name="approved_label">approved</string>
     
     <string name="discard_message">Are you sure you want to discard these changes?</string>
+    <string name="delete_claim_message">Are you sure you want to delete this claim?</string>
+    <string name="delete_expense_message">Are you sure you want to delete this expense?</string>
     <string name="amount_format_error">Incorrect format!</string>
     
     <string-array name="expense_categories">

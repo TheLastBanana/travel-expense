@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint.Join;
 import android.os.Bundle;
@@ -113,6 +115,10 @@ public class ListExpensesActivity extends Activity {
 		case R.id.action_add_expense:
 			addExpense();
 			return true;
+			
+		case R.id.action_delete_claim:
+			deleteAlert();
+			return true;
 	    	
 		default:
 			break;
@@ -139,6 +145,37 @@ public class ListExpensesActivity extends Activity {
     	intent.putExtra(EditExpenseActivity.CLAIM_INDEX, claimIndex);
     	
     	startActivity(intent);
+	}
+	
+	/**
+	 * Ask before deleting claim.
+	 */
+	private void deleteAlert() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(R.string.delete_claim_message)
+			   .setPositiveButton(R.string.action_cancel, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						deleteClaim();
+						finish();
+					}
+			   })
+			   .setNegativeButton(R.string.action_delete_claim, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+					}
+			   });
+		builder.create().show();
+	}
+	
+	/**
+	 * Delete the claim.
+	 */
+	private void deleteClaim() {
+		ClaimListController.getClaimList().removeClaim(claim);
+		ClaimListController.save();
+		
+		finish();
 	}
 	
 	// Update the total
