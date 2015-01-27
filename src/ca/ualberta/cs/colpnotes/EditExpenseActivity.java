@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,27 +48,53 @@ public class EditExpenseActivity extends Activity {
 	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        actionBarView = getLayoutInflater().inflate(R.layout.menu_edit_expense, null);
-        ActionBar actionBar = getActionBar();
-        actionBar.setCustomView(actionBarView);
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getMenuInflater().inflate(R.menu.edit_expense, menu);
+    	
+    	if (ClaimStatus.getEditable(claim.getStatus())) {
+    		// Create custom menu with accept button
+            actionBarView = getLayoutInflater().inflate(R.layout.menu_edit_expense, null);
+	        ActionBar actionBar = getActionBar();
+	        actionBar.setCustomView(actionBarView);
+	        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         
-        // Handle onClick for custom accept button
-        actionBar.getCustomView().findViewById(R.id.accept_expense_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-	        	saveChanges();
-	        	finish();
-			}
-		});
+	        // Handle onClick for custom accept button
+	        actionBar.getCustomView().findViewById(R.id.accept_expense_button).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+		        	saveChanges();
+		        	finish();
+				}
+			});
+	        
+        // Not editable
+    	} else {
+    	    ActionBar actionBar = getActionBar();
+    	    actionBar.setDisplayHomeAsUpEnabled(true);
+    	    
+    	    // Disable deletion
+    	    menu.findItem(R.id.action_discard_expense_changes).setEnabled(false);
+    	    menu.findItem(R.id.action_discard_expense_changes).setVisible(false);
+    	    menu.findItem(R.id.action_delete_expense).setEnabled(false);
+    	    menu.findItem(R.id.action_delete_expense).setVisible(false);
+    	    
+    	    // Disable editable views
+    	    ((TextView) findViewById(R.id.expense_date_textview)).setClickable(false);
+    	    ((Spinner) findViewById(R.id.expense_category_spinner)).setClickable(false);
+    	    ((Spinner) findViewById(R.id.expense_currency_spinner)).setClickable(false);
+    	    ((EditText) findViewById(R.id.expense_amount_edittext)).setKeyListener(null);
+    	    ((EditText) findViewById(R.id.expense_description_edittext)).setKeyListener(null);
+    	}
         
         return true;
     }
 	
 	@Override
 	public void onBackPressed() {
-		discardAlert();
+		if (ClaimStatus.getEditable(claim.getStatus())) {
+			discardAlert();
+		} else {
+			finish();
+		}
 	}
 	
 	@Override
@@ -81,6 +108,11 @@ public class EditExpenseActivity extends Activity {
         	
         case R.id.action_delete_expense:
         	deleteAlert();
+        	return true;
+        	
+        case android.R.id.home:
+        	// We're not editable if this is visible, so just go back
+        	finish();
         	return true;
         	
     	default:
