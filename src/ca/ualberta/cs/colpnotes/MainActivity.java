@@ -1,6 +1,9 @@
 package ca.ualberta.cs.colpnotes;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,10 +26,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         ClaimListManager.initManager(this.getApplicationContext());
         
-        // Get the global claims from the singleton
-        ArrayList<Claim> claims = ClaimListController.getClaimList().getClaims();
-        
         // Create the adapter
+        ArrayList<Claim> claims = ClaimListController.getClaimList().getClaims();
         claimListAdapter = new ClaimAdapter(this, R.layout.claim_list_item, claims);
         
         // Attach to the ListView 
@@ -50,14 +51,15 @@ public class MainActivity extends Activity {
     
     @Override
     protected void onResume() {
-    	if (claimListAdapter != null) claimListAdapter.notifyDataSetChanged();
+    	claimListAdapter.notifyDataSetChanged();
+    	claimListAdapter.sort(new Comparator<Claim>() {
+			@Override
+            public int compare(Claim lhs, Claim rhs) {
+	            return lhs.getFrom().before(rhs.getFrom()) ? -1 : 1;
+            }
+		});
     	
         super.onResume();
-    }
-
-    public void addClaim() {
-    	Intent intent = new Intent(MainActivity.this, EditClaimActivity.class);
-    	startActivity(intent);
     }
 
     @Override
@@ -78,5 +80,13 @@ public class MainActivity extends Activity {
         	return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Go to the activity to add a new claim.
+     */
+    private void addClaim() {
+    	Intent intent = new Intent(MainActivity.this, EditClaimActivity.class);
+    	startActivity(intent);
     }
 }
