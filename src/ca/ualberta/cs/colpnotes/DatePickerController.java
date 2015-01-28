@@ -43,6 +43,16 @@ public class DatePickerController {
 	    this.minDate = minDate;
 	    this.maxDate = maxDate;
 	    
+	    // Potential crash bug workaround
+	    // http://stackoverflow.com/a/15698792
+	    // Referenced on 24/01/15
+	    if (this.minDate != null) {
+	    	this.minDate.set(Calendar.MILLISECOND, this.minDate.getMinimum(Calendar.MILLISECOND));
+	    }
+	    if (this.maxDate != null) {
+	    	this.maxDate.set(Calendar.MILLISECOND, this.minDate.getMaximum(Calendar.MILLISECOND));
+	    }
+	    
 	    // Show dialog on click
 	    textView.setOnClickListener(new View.OnClickListener() {
 			@Override
