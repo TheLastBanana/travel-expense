@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
@@ -129,6 +131,10 @@ public class ListExpensesActivity extends Activity {
 			
 		case R.id.action_approve_claim:
 			approveAlert();
+			return true;
+			
+		case R.id.action_mail_claim:
+			mailClaim();
 			return true;
 	    	
 		default:
@@ -255,6 +261,27 @@ public class ListExpensesActivity extends Activity {
 		builder.append(ClaimHelper.getTotalString(claim, this));
 		
 		totalView.setText(builder.toString());
+	}
+	
+	/**
+	 * Mail the claim.
+	 * 
+	 * Based on code from:
+	 * http://stackoverflow.com/a/2197841
+	 * Accessed on 27/01/15
+	 */
+	private void mailClaim() {
+		Intent i = new Intent(Intent.ACTION_SEND);
+		i.setType("message/rfc822");
+		i.putExtra(Intent.EXTRA_SUBJECT, "Travel expense claim (" + claim.getName() + ")");
+		i.putExtra(Intent.EXTRA_TEXT, ClaimHelper.prettyPrint(claim, this));
+		
+		try {
+			startActivity(i);
+		}
+		catch (ActivityNotFoundException e) {
+			Toast.makeText(this, "No email client installed!", Toast.LENGTH_SHORT).show();
+		}
 	}
 	
 	/**

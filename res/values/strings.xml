@@ -5,6 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="claims_label">Claims</string>
     <string name="name_hint">Name</string>
+    <string name="status_hint">Status</string>
     <string name="destination_hint">Destination</string>
     <string name="reason_hint">Reason for travel</string>
     <string name="amount_hint">Amount</string>
@@ -12,6 +13,7 @@
     <string name="category_hint">Category</string>
     <string name="date_hint">Date</string>
     <string name="description_hint">Description</string>
+    <string name="range_hint">Range</string>
     <string name="action_add_claim">Add claim</string>
     <string name="action_edit_claim">Edit claim</string>
     <string name="action_add_expense">Add expense</string>
