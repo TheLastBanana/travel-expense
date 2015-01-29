@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /*
  * Lets the user modify the settings for an expense.
@@ -61,6 +62,8 @@ public class EditExpenseActivity extends Activity {
 	        actionBar.getCustomView().findViewById(R.id.accept_expense_button).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					if (!validate()) return;
+					
 		        	saveChanges();
 		        	finish();
 				}
@@ -313,5 +316,19 @@ public class EditExpenseActivity extends Activity {
 		}
 		
 		ClaimListController.save();
+	}
+	
+	/**
+	 * Check each of the input fields for valid input.
+	 * @return True if all fields validated, false if at least one is invalid.
+	 */
+	private boolean validate() {
+		// Need a valid amount
+		if (amountEditText.getText().length() == 0) {
+			Toast.makeText(this, "Please enter a valid amount", Toast.LENGTH_LONG).show();
+			return false;
+		}
+		
+		return true;
 	}
 }
