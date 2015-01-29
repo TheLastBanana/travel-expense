@@ -1,6 +1,9 @@
 package ca.ualberta.cs.colpnotes;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -15,6 +18,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /*
  * Lets the user modify the settings for a claim.
@@ -51,6 +55,8 @@ public class EditClaimActivity extends Activity {
 	        actionBar.getCustomView().findViewById(R.id.accept_claim_button).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					if (!validate()) return;
+					
 		        	saveChanges();
 		        	finish();
 				}
@@ -244,5 +250,21 @@ public class EditClaimActivity extends Activity {
 		}
 		
     	ClaimListController.save();
+	}
+	
+	/**
+	 * Check each of the input fields for valid input.
+	 * @return True if all fields validated, false if at least one is invalid.
+	 */
+	private boolean validate() {
+		String name = nameEditText.getText().toString();
+		
+		// Need a name
+		if (name.length() == 0) {
+			Toast.makeText(this, "Please enter a name", Toast.LENGTH_LONG).show();
+			return false;
+		}
+		
+		return true;
 	}
 }
