@@ -18,14 +18,42 @@ public class Claim implements Serializable {
 	 */
     private static final long serialVersionUID = -5147034485394091896L;
     
-	private String name = "";
-	private String destination = "";
-	private String reason = "";
-	private ClaimStatus status = ClaimStatus.IN_PROGRESS;
-	private Calendar from = Calendar.getInstance();
-	private Calendar to = Calendar.getInstance();
-	private ExpenseList expenses = new ExpenseList();
-
+	private String name;
+	private String destination;
+	private String reason;
+	private ClaimStatus status;
+	private Calendar from;
+	private Calendar to;
+	private ExpenseList expenses;
+	
+	Claim() {
+		setName("");
+		setDestination("");
+		setReason("");
+		setStatus(ClaimStatus.IN_PROGRESS);
+		setFrom(Calendar.getInstance());
+		setTo(Calendar.getInstance());
+		expenses = new ExpenseList();
+	}
+	
+	Claim (Claim c) {
+		copyFrom(c);
+	}
+	
+	/**
+	 * Copies all attributes from the given claim.
+	 * @param c The claim to copy from.
+	 */
+	public void copyFrom(Claim c) {
+		setName(new String(c.getName()));
+		setDestination(new String(c.getDestination()));
+		setReason(new String(c.getReason()));
+		setStatus(c.getStatus());
+		setFrom((Calendar) c.getFrom().clone());
+		setTo((Calendar) c.getTo().clone());
+		expenses = new ExpenseList(c.getExpenseList());
+	}
+	
 	public String getName() {
 		return name;
 	}

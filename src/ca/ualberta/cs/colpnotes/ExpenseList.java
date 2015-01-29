@@ -20,6 +20,10 @@ public class ExpenseList implements Serializable {
 		expenses = new ArrayList<Expense>();
 	}
 	
+	public ExpenseList(ExpenseList el) {
+		expenses = new ArrayList<Expense>(el.getExpenses());
+	}
+	
 	public ArrayList<Expense> getExpenses() {
 		return expenses;
 	}
