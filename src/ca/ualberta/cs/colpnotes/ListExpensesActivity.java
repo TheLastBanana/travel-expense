@@ -1,6 +1,7 @@
 package ca.ualberta.cs.colpnotes;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -80,7 +81,15 @@ public class ListExpensesActivity extends Activity {
 	@Override
 	protected void onResume() {
 		// Update list
-    	if (expenseListAdapter != null) expenseListAdapter.notifyDataSetChanged();
+    	if (expenseListAdapter != null) {
+    		expenseListAdapter.notifyDataSetChanged();
+        	expenseListAdapter.sort(new Comparator<Expense>() {
+    			@Override
+                public int compare(Expense lhs, Expense rhs) {
+    	            return lhs.getDate().before(rhs.getDate()) ? -1 : 1;
+                }
+    		});
+    	}
     	
     	setTitle(claim.getName());
     	
