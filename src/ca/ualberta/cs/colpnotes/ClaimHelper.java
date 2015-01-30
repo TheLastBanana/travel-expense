@@ -1,8 +1,13 @@
 package ca.ualberta.cs.colpnotes;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Currency;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import android.content.Context;
 import android.text.format.DateFormat;
@@ -22,14 +27,40 @@ public class ClaimHelper {
 		StringBuilder builder = new StringBuilder();
 		
 		// Nothing to list
-		if (claim.getExpenseList().size() == 0) {
+		if (totals.size() == 0) {
 			builder.append(context.getString(R.string.na_label));
 			
 		// Build the comma-separated list
 		} else {
+			// Sort by amount first, then alphabetically by currency code
+			ArrayList<Map.Entry<Currency, BigDecimal>> sorted =
+					new ArrayList<Map.Entry<Currency,BigDecimal>>(totals.entrySet());
+			
+			Collections.sort(sorted, new Comparator<Map.Entry<Currency, BigDecimal>>() {
+				@Override
+	            public int compare(Entry<Currency, BigDecimal> lhs,
+	                    Entry<Currency, BigDecimal> rhs) {
+		            
+					BigDecimal lhsAmount = lhs.getValue();
+					BigDecimal rhsAmount = rhs.getValue();
+					
+					// Equal, so sort by currency code
+					if (lhsAmount.equals(rhsAmount)) {
+						String lhsCode = lhs.getKey().getCurrencyCode();
+						String rhsCode = rhs.getKey().getCurrencyCode();
+						
+						return lhsCode.compareTo(rhsCode);
+					}
+					
+					// Largest to smallest
+					return -lhsAmount.compareTo(rhsAmount);
+	            }
+			});
+			
 			// Create strings for each amount and separate with commas
-			for (Currency currency : totals.keySet()) {
-				BigDecimal amount = totals.get(currency);
+			for (Map.Entry<Currency, BigDecimal> entry : sorted) {
+				Currency currency = entry.getKey();
+				BigDecimal amount = entry.getValue();
 				
 				builder.append(amount.toPlainString() +
 							   " " +
