@@ -14,68 +14,6 @@ import android.text.format.DateFormat;
 
 public class ClaimHelper {
 	/**
-	 * Creates a comma-separated string listing the totals of all the claim's expenses by currency type.
-	 * @param claim The claim holding the expenses
-	 * @param context The context to get strings from.
-	 * @return The resulting string.
-	 */
-	static public final String getTotalString(Claim claim, Context context) {
-		// Map from currency to amount
-		HashMap<Currency, BigDecimal> totals = claim.getTotals();
-		
-		// Build the string
-		StringBuilder builder = new StringBuilder();
-		
-		// Nothing to list
-		if (totals.size() == 0) {
-			builder.append(context.getString(R.string.na_label));
-			
-		// Build the comma-separated list
-		} else {
-			// Sort by amount first, then alphabetically by currency code
-			ArrayList<Map.Entry<Currency, BigDecimal>> sorted =
-					new ArrayList<Map.Entry<Currency,BigDecimal>>(totals.entrySet());
-			
-			Collections.sort(sorted, new Comparator<Map.Entry<Currency, BigDecimal>>() {
-				@Override
-	            public int compare(Entry<Currency, BigDecimal> lhs,
-	                    Entry<Currency, BigDecimal> rhs) {
-		            
-					BigDecimal lhsAmount = lhs.getValue();
-					BigDecimal rhsAmount = rhs.getValue();
-					
-					// Equal, so sort by currency code
-					if (lhsAmount.equals(rhsAmount)) {
-						String lhsCode = lhs.getKey().getCurrencyCode();
-						String rhsCode = rhs.getKey().getCurrencyCode();
-						
-						return lhsCode.compareTo(rhsCode);
-					}
-					
-					// Largest to smallest
-					return -lhsAmount.compareTo(rhsAmount);
-	            }
-			});
-			
-			// Create strings for each amount and separate with commas
-			for (Map.Entry<Currency, BigDecimal> entry : sorted) {
-				Currency currency = entry.getKey();
-				BigDecimal amount = entry.getValue();
-				
-				builder.append(amount.toPlainString() +
-							   " " +
-							   currency.getCurrencyCode() +
-							   ", ");
-			}
-			
-			// Remove last comma
-			builder.delete(builder.length() - 2, builder.length());
-		}
-		
-		return builder.toString();
-	}
-	
-	/**
 	 * List out the each of the claims and their expenses as a plaintext string.
 	 * Based on code from: http://stackoverflow.com/a/2197841
 	 * Accessed on 27/01/15
@@ -109,7 +47,7 @@ public class ClaimHelper {
 		
 		// Print the total
 		sb.append(context.getString(R.string.total_label) + ": ");
-		sb.append(ClaimHelper.getTotalString(claim, context) + "\n");
+		sb.append(ExpenseListHelper.getTotalString(claim.getExpenseList(), context) + "\n");
 		
 		return sb.toString();
 	}

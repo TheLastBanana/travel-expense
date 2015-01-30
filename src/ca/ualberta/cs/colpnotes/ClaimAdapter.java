@@ -48,12 +48,9 @@ public class ClaimAdapter extends ArrayAdapter<Claim> {
 	    // Set claim total
 	    TextView statusText = (TextView) view.findViewById(R.id.status_textview);
 	    if (statusText != null) {
-	    	statusText.setText(ClaimHelper.getTotalString(claim, getContext()));
+	    	statusText.setText(ExpenseListHelper.getTotalString(claim.getExpenseList(), getContext()));
 	    }
-	    
 	    
 	    return view;
     }
-	
-	
 }

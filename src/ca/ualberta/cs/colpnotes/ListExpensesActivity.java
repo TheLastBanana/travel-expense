@@ -267,7 +267,7 @@ public class ListExpensesActivity extends Activity {
 		builder.append(getString(R.string.total_label) + " (");
 		builder.append(getString(ClaimStatus.getNameID(claim.getStatus())));
 		builder.append("):\n");
-		builder.append(ClaimHelper.getTotalString(claim, this));
+		builder.append(ExpenseListHelper.getTotalString(claim.getExpenseList(), this));
 		
 		totalView.setText(builder.toString());
 	}
