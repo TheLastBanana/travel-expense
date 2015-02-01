@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Currency;
+import java.util.Locale;
 
 /**
  * Holds information about a single expense.
@@ -25,7 +26,14 @@ public class Expense implements Serializable {
 		setCategory(category);
 		setDescription("");
 		setAmount(new BigDecimal(0));
-		setCurrency(Currency.getInstance("USD"));
+		
+		try {
+			setCurrency(Currency.getInstance(Locale.getDefault()));
+		}
+		catch (IllegalArgumentException e) {
+			// Not a supported locale, so fall back to USD
+			setCurrency(Currency.getInstance("USD"));
+		}
 	}
 	
 	public Expense(Expense e) {
