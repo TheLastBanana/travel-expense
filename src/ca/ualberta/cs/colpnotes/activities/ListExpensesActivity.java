@@ -46,7 +46,10 @@ public class ListExpensesActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_expenses);
-		
+	}
+	
+	@Override
+	protected void onResume() {
 		// Get the claim
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -85,10 +88,7 @@ public class ListExpensesActivity extends Activity {
 		    	startActivity(intent);
             }
 		});
-	}
-	
-	@Override
-	protected void onResume() {
+        
 		// Update list
     	if (expenseListAdapter != null) {
     		expenseListAdapter.notifyDataSetChanged();
