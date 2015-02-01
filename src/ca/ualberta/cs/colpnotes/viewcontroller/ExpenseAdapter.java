@@ -1,8 +1,12 @@
-package ca.ualberta.cs.colpnotes;
+package ca.ualberta.cs.colpnotes.viewcontroller;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import ca.ualberta.cs.colpnotes.R;
+import ca.ualberta.cs.colpnotes.R.id;
+import ca.ualberta.cs.colpnotes.R.layout;
+import ca.ualberta.cs.colpnotes.model.Expense;
 import android.content.Context;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;

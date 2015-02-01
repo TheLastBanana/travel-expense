@@ -1,14 +1,28 @@
-package ca.ualberta.cs.colpnotes;
+package ca.ualberta.cs.colpnotes.activities;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import ca.ualberta.cs.colpnotes.R;
+import ca.ualberta.cs.colpnotes.R.id;
+import ca.ualberta.cs.colpnotes.R.layout;
+import ca.ualberta.cs.colpnotes.R.menu;
+import ca.ualberta.cs.colpnotes.R.string;
+import ca.ualberta.cs.colpnotes.helper.ClaimHelper;
+import ca.ualberta.cs.colpnotes.helper.ExpenseListHelper;
+import ca.ualberta.cs.colpnotes.model.Claim;
+import ca.ualberta.cs.colpnotes.model.ClaimStatus;
+import ca.ualberta.cs.colpnotes.model.Expense;
+import ca.ualberta.cs.colpnotes.viewcontroller.ClaimListController;
+import ca.ualberta.cs.colpnotes.viewcontroller.ExpenseAdapter;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -95,8 +109,8 @@ public class ListExpensesActivity extends Activity {
     	
         super.onResume();
     	
-    	// Update status and total
-    	if (menu != null) updateStatus();
+    	// Update all the views
+    	if (menu != null) updateViews();
 	}
 
 	@Override
@@ -105,7 +119,7 @@ public class ListExpensesActivity extends Activity {
 		getMenuInflater().inflate(R.menu.list_expenses, menu);
 		this.menu = menu;
 		
-		updateStatus();
+		updateViews();
 		
 		return true;
 	}
@@ -183,7 +197,7 @@ public class ListExpensesActivity extends Activity {
 	private void submitClaim() {
 		claim.setStatus(ClaimStatus.SUBMITTED);
 		ClaimListController.save();
-		updateStatus();
+		updateViews();
 	}
 	
 	/**
@@ -192,7 +206,7 @@ public class ListExpensesActivity extends Activity {
 	private void returnClaim() {
 		claim.setStatus(ClaimStatus.RETURNED);
 		ClaimListController.save();
-		updateStatus();
+		updateViews();
 	}
 	
 	/**
@@ -201,7 +215,7 @@ public class ListExpensesActivity extends Activity {
 	private void approveClaim() {
 		claim.setStatus(ClaimStatus.APPROVED);
 		ClaimListController.save();
-		updateStatus();
+		updateViews();
 	}
 	
 	/**
@@ -256,23 +270,6 @@ public class ListExpensesActivity extends Activity {
 	}
 	
 	/**
-	 * Updates the total text at the bottom of the list.
-	 */
-	private void updateTotal() {
-		// Update view
-		TextView totalView = (TextView) findViewById(R.id.expense_total_textview);
-		
-		// Build the string
-		StringBuilder builder = new StringBuilder();
-		builder.append(getString(R.string.total_label) + " (");
-		builder.append(getString(ClaimStatus.getNameID(claim.getStatus())));
-		builder.append("):\n");
-		builder.append(ExpenseListHelper.getTotalString(claim.getExpenseList(), this));
-		
-		totalView.setText(builder.toString());
-	}
-	
-	/**
 	 * Mail the claim.
 	 * 
 	 * Based on code from:
@@ -294,16 +291,52 @@ public class ListExpensesActivity extends Activity {
 	}
 	
 	/**
-	 * Updates button states and text based on new claim status.
+	 * Update the date range at the bottom of the screen.
+	 */
+	private void updateDateRange() {
+		TextView dateRangeView = (TextView) findViewById(R.id.date_range_textview);
+		
+    	StringBuilder sb = new StringBuilder();
+    	sb.append(DateFormat.getMediumDateFormat(this).format(claim.getFrom().getTime()));
+    	sb.append(" - ");
+    	sb.append(DateFormat.getMediumDateFormat(this).format(claim.getTo().getTime()));
+		sb.append(" (");
+		sb.append(getString(ClaimStatus.getNameID(claim.getStatus())));
+		sb.append(")");
+    	
+    	dateRangeView.setText(sb.toString());
+	}
+	
+	/**
+	 * Update the total text at the bottom of the list.
+	 */
+	private void updateTotal() {
+		// Update view
+		TextView totalView = (TextView) findViewById(R.id.expense_total_textview);
+		
+		// Build the string
+		StringBuilder builder = new StringBuilder();
+		builder.append(getString(R.string.total_label) + ":\n");
+		builder.append(ExpenseListHelper.getTotalString(claim.getExpenseList(), this));
+		
+		totalView.setText(builder.toString());
+	}
+	
+	/**
+	 * Updates button states and text based on new claim data.
 	 * Throws an exception if the menu is null.
 	 * @throws RuntimeException
 	 */
-	private void updateStatus() {
+	private void updateViews() {
 		if (menu == null) {
 			throw new RuntimeException("Null menu can't be updated");
 		}
 		
+		// Update the total at the bottom of the screen
 		updateTotal();
+		
+		// Update the date range at the top of the screen
+		updateDateRange();
 		
 		ClaimStatus claimStatus = claim.getStatus();
 		

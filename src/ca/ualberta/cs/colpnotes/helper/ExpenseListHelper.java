@@ -1,4 +1,4 @@
-package ca.ualberta.cs.colpnotes;
+package ca.ualberta.cs.colpnotes.helper;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -9,6 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import ca.ualberta.cs.colpnotes.R;
+import ca.ualberta.cs.colpnotes.R.string;
+import ca.ualberta.cs.colpnotes.model.Expense;
+import ca.ualberta.cs.colpnotes.model.ExpenseList;
 import android.content.Context;
 
 public class ExpenseListHelper {

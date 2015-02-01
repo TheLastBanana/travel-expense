@@ -2,22 +2,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.ualberta.cs.colpnotes.ListExpensesActivity" >
+    tools:context="ca.ualberta.cs.colpnotes.activities.ListExpensesActivity" >
 
-    <Space
+    <TextView
+        android:id="@+id/date_range_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="61dp" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="6dp"
+        android:gravity="center_horizontal"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+	<View
+	    android:id="@+id/top_divider"
+	    android:layout_width="match_parent"
+	    android:layout_height="1dp"
+	    android:layout_below="@+id/date_range_textview"
+	    android:background="?android:attr/listDivider" />
 
     <ListView
         android:id="@+id/expense_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/expense_divider"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" />
+        android:layout_above="@+id/expense_total_textview"
+        android:layout_below="@+id/top_divider"
+        android:layout_alignParentLeft="true" />
 
 	<View
 	    android:id="@+id/expense_divider"

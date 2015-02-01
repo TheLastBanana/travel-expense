@@ -1,7 +1,13 @@
-package ca.ualberta.cs.colpnotes;
+package ca.ualberta.cs.colpnotes.viewcontroller;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.colpnotes.R;
+import ca.ualberta.cs.colpnotes.R.id;
+import ca.ualberta.cs.colpnotes.R.layout;
+import ca.ualberta.cs.colpnotes.helper.ExpenseListHelper;
+import ca.ualberta.cs.colpnotes.model.Claim;
+import ca.ualberta.cs.colpnotes.model.ClaimStatus;
 import android.content.Context;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;

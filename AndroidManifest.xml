@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity" >
+            android:name=".activities.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,19 +22,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EditClaimActivity"
-            android:label="@string/edit_claim_label" >
+            android:name=".activities.EditClaimActivity"
+            android:label="@string/edit_claim_label">
         </activity>
         <activity
-            android:name=".ListExpensesActivity"
-            android:label="@string/list_expenses_label"
-            android:parentActivityName=".MainActivity" >
+            android:name=".activities.ListExpensesActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:label="@string/list_expenses_label" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ca.ualberta.cs.colpnotes.MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".EditExpenseActivity"
+            android:name=".activities.EditExpenseActivity"
             android:label="@string/edit_expense_label" >
         </activity>
     </application>

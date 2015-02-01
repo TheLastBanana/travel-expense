@@ -1,4 +1,4 @@
-package ca.ualberta.cs.colpnotes;
+package ca.ualberta.cs.colpnotes.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;

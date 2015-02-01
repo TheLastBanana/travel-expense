@@ -1,4 +1,4 @@
-package ca.ualberta.cs.colpnotes;
+package ca.ualberta.cs.colpnotes.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -26,7 +26,7 @@ public class Claim implements Serializable {
 	private Calendar to;
 	private ExpenseList expenses;
 	
-	Claim() {
+	public Claim() {
 		setName("");
 		setDestination("");
 		setReason("");
@@ -36,7 +36,7 @@ public class Claim implements Serializable {
 		expenses = new ExpenseList();
 	}
 	
-	Claim (Claim c) {
+	public Claim (Claim c) {
 		copyFrom(c);
 	}
 	

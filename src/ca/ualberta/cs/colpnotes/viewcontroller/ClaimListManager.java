@@ -1,4 +1,4 @@
-package ca.ualberta.cs.colpnotes;
+package ca.ualberta.cs.colpnotes.viewcontroller;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import ca.ualberta.cs.colpnotes.model.ClaimList;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -72,11 +73,12 @@ public class ClaimListManager {
 	 */
 	public ClaimList loadClaimList() throws ClassNotFoundException, IOException {
 		SharedPreferences settings = context.getSharedPreferences(prefFile, Context.MODE_PRIVATE);
-		String studentListData = settings.getString(clKey, "");
-		if (studentListData.equals("")) {
+		
+		String claimListData = settings.getString(clKey, "");
+		if (claimListData.equals("")) {
 			return new ClaimList();
 		} else {
-			return claimListFromString(studentListData);
+			return claimListFromString(claimListData);
 		}
 	}
 	

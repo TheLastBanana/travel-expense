@@ -1,7 +1,9 @@
-package ca.ualberta.cs.colpnotes;
+package ca.ualberta.cs.colpnotes.viewcontroller;
 
 import java.util.Calendar;
 
+import ca.ualberta.cs.colpnotes.R;
+import ca.ualberta.cs.colpnotes.R.string;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;

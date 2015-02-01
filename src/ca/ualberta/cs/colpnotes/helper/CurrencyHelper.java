@@ -1,4 +1,4 @@
-package ca.ualberta.cs.colpnotes;
+package ca.ualberta.cs.colpnotes.helper;
 
 import java.util.ArrayList;
 import java.util.Collections;

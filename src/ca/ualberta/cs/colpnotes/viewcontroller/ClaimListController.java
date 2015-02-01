@@ -1,9 +1,10 @@
-package ca.ualberta.cs.colpnotes;
+package ca.ualberta.cs.colpnotes.viewcontroller;
 
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
+import ca.ualberta.cs.colpnotes.model.ClaimList;
 import android.content.Context;
 import android.util.Log;
 
@@ -54,9 +55,11 @@ public class ClaimListController {
 			claimList = ClaimListManager.getManager().loadClaimList();
 		}
 		catch (IOException e) {
+			Log.e("CLC", "IOException");
 			throw new RuntimeException("Failed to load claim list");
 		}
 		catch (ClassNotFoundException e) {
+			Log.e("CLC", "ClassNotFoundException");
 			throw new RuntimeException("Failed to load claim list");
 		}
 		

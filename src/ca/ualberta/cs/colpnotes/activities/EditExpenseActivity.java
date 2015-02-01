@@ -1,8 +1,20 @@
-package ca.ualberta.cs.colpnotes;
+package ca.ualberta.cs.colpnotes.activities;
 
 import java.math.BigDecimal;
 import java.util.Currency;
 
+import ca.ualberta.cs.colpnotes.R;
+import ca.ualberta.cs.colpnotes.R.array;
+import ca.ualberta.cs.colpnotes.R.id;
+import ca.ualberta.cs.colpnotes.R.layout;
+import ca.ualberta.cs.colpnotes.R.menu;
+import ca.ualberta.cs.colpnotes.R.string;
+import ca.ualberta.cs.colpnotes.helper.CurrencyHelper;
+import ca.ualberta.cs.colpnotes.model.Claim;
+import ca.ualberta.cs.colpnotes.model.ClaimStatus;
+import ca.ualberta.cs.colpnotes.model.Expense;
+import ca.ualberta.cs.colpnotes.viewcontroller.ClaimListController;
+import ca.ualberta.cs.colpnotes.viewcontroller.DatePickerController;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;

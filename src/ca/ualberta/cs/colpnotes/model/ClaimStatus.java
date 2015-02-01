@@ -1,7 +1,10 @@
-package ca.ualberta.cs.colpnotes;
+package ca.ualberta.cs.colpnotes.model;
 
 import java.util.EnumMap;
 import java.util.Map;
+
+import ca.ualberta.cs.colpnotes.R;
+import ca.ualberta.cs.colpnotes.R.string;
 
 /*
  * Holds constants for claim status.
