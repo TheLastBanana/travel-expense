@@ -342,6 +342,12 @@ public class EditExpenseActivity extends Activity {
 			return false;
 		}
 		
+		// Need a name
+		if (descriptionEditText.length() == 0) {
+			Toast.makeText(this, "Please enter a description", Toast.LENGTH_LONG).show();
+			return false;
+		}
+		
 		return true;
 	}
 }

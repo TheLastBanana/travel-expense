@@ -42,18 +42,18 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
 	    
 	    Expense expense = expenses.get(position);
 	    
-	    // Set expense category
+	    // Set expense description
 	    TextView mainTextView = (TextView) view.findViewById(R.id.main_textview);
 	    if (mainTextView != null) {
-	    	mainTextView.setText(expense.getAmount().toString() + " " + expense.getCurrency().getCurrencyCode());
+	    	mainTextView.setText(expense.getDescription());
 	    }
 	    
-	    // Set expense cost
+	    // Set expense date and amount
 	    TextView secondaryTextView = (TextView) view.findViewById(R.id.secondary_textview);
 	    if (secondaryTextView != null) {
 	    	Calendar calendar = expense.getDate();
 	    	String dateString = DateFormat.getMediumDateFormat(getContext()).format(calendar.getTime());
-	    	secondaryTextView.setText(dateString + " - " + expense.getCategory());
+	    	secondaryTextView.setText(dateString + " - " + expense.getAmount().toString() + " " + expense.getCurrency().getCurrencyCode());
 	    }
 	    
 	    return view;
