@@ -3,6 +3,7 @@ package ca.ualberta.cs.colpnotes;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,16 @@ public class ClaimAdapter extends ArrayAdapter<Claim> {
 	    // Set claim total
 	    TextView statusText = (TextView) view.findViewById(R.id.status_textview);
 	    if (statusText != null) {
-	    	statusText.setText(ExpenseListHelper.getTotalString(claim.getExpenseList(), getContext()));
+	    	Context context = view.getContext();
+	    	
+	    	StringBuilder sb = new StringBuilder();
+	    	sb.append(DateFormat.getMediumDateFormat(context).format(claim.getFrom().getTime()));
+	    	sb.append(" - ");
+	    	sb.append(DateFormat.getMediumDateFormat(context).format(claim.getTo().getTime()));
+	    	sb.append("\n");
+	    	sb.append(ExpenseListHelper.getTotalString(claim.getExpenseList(), getContext()));
+	    	
+	    	statusText.setText(sb.toString());
 	    }
 	    
 	    return view;
