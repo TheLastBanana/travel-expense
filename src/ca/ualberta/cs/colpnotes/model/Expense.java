@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Currency;
 
-/*
+/**
  * Holds information about a single expense.
  */
 public class Expense implements Serializable {
@@ -32,8 +32,8 @@ public class Expense implements Serializable {
 		copyFrom(e);
 	}
 	
-	/*
-	 * Copies all attributes from the given expense.
+	/**
+	 * Copy all attributes from the given expense.
 	 */
 	public void copyFrom(Expense e) {
 		setDate((Calendar) e.date.clone());
@@ -80,7 +80,9 @@ public class Expense implements Serializable {
 		updateAmountScale();
 	}
 	
-	// Updates the scale of the amount based on the currency
+	/**
+	 *  Update the scale of the amount based on the currency fraction digits.
+	 */
 	private void updateAmountScale() {
 		if (amount == null) return;
 		if (currency == null) return;

@@ -4,9 +4,8 @@ import java.util.EnumMap;
 import java.util.Map;
 
 import ca.ualberta.cs.colpnotes.R;
-import ca.ualberta.cs.colpnotes.R.string;
 
-/*
+/**
  * Holds constants for claim status.
  * 
  * Referenced code from:
@@ -25,6 +24,7 @@ public enum ClaimStatus {
 	private static final Map<ClaimStatus, Boolean> editable
 	= new EnumMap<ClaimStatus, Boolean>(ClaimStatus.class);
 	
+	// Static data
 	static {
 		nameIDs.put(IN_PROGRESS, R.string.in_progress_label);
 		nameIDs.put(SUBMITTED, R.string.submitted_label);

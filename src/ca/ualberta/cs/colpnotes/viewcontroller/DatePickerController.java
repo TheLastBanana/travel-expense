@@ -2,8 +2,6 @@ package ca.ualberta.cs.colpnotes.viewcontroller;
 
 import java.util.Calendar;
 
-import ca.ualberta.cs.colpnotes.R;
-import ca.ualberta.cs.colpnotes.R.string;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -12,8 +10,9 @@ import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import ca.ualberta.cs.colpnotes.R;
 
-/*
+/**
  * A controller between a TextView and a Calendar which allows the user
  * to set the Calendar date in a dialog and displays the date formatted
  * nicely in the TextView.
@@ -66,24 +65,44 @@ public class DatePickerController {
 	    updateTextView();
     }
 	
+	/**
+	 * Get the controlled TextView.
+	 * @return The TextView.
+	 */
 	public TextView getTextView() {
 		return textView;
 	}
 
+	/**
+	 * Get the Calendar storing the date.
+	 * @return The Calendar.
+	 */
 	public Calendar getCalendar() {
 		return calendar;
 	}
 
+	/**
+	 * Set the date.
+	 * @param year The year.
+	 * @param month The month of the year.
+	 * @param day The day of the month.
+	 */
 	public void setDate(int year, int month, int day) {
 		calendar.set(year, month, day);
 		updateTextView();
 	}
 	
+	/**
+	 * Update the controlled TextView.
+	 */
 	public void updateTextView() {
 		String dateString = DateFormat.getMediumDateFormat(textView.getContext()).format(calendar.getTime());
 		textView.setText(dateString);
 	}
 	
+	/**
+	 * Pop up the date picker dialog.
+	 */
 	private void showDialog() {
 		cancelled = true;
 		

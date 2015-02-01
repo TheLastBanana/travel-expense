@@ -2,12 +2,6 @@ package ca.ualberta.cs.colpnotes.viewcontroller;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.colpnotes.R;
-import ca.ualberta.cs.colpnotes.R.id;
-import ca.ualberta.cs.colpnotes.R.layout;
-import ca.ualberta.cs.colpnotes.helper.ExpenseListHelper;
-import ca.ualberta.cs.colpnotes.model.Claim;
-import ca.ualberta.cs.colpnotes.model.ClaimStatus;
 import android.content.Context;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -15,8 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import ca.ualberta.cs.colpnotes.R;
+import ca.ualberta.cs.colpnotes.helper.ExpenseListHelper;
+import ca.ualberta.cs.colpnotes.model.Claim;
+import ca.ualberta.cs.colpnotes.model.ClaimStatus;
 
-/*
+/**
  * An adapter used to display an ArrayList of Claims.
  * 
  * Used the following code for reference:
@@ -31,8 +29,8 @@ public class ClaimAdapter extends ArrayAdapter<Claim> {
 	    this.claims = claims;
     }
 
-	/*
-	 * Returns a view with the custom claim layout.
+	/**
+	 * Return a view with the custom claim layout.
 	 */
 	@Override
     public View getView(int position, View convertView, ViewGroup parent) {

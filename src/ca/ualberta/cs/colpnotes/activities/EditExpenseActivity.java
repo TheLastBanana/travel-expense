@@ -3,25 +3,12 @@ package ca.ualberta.cs.colpnotes.activities;
 import java.math.BigDecimal;
 import java.util.Currency;
 
-import ca.ualberta.cs.colpnotes.R;
-import ca.ualberta.cs.colpnotes.R.array;
-import ca.ualberta.cs.colpnotes.R.id;
-import ca.ualberta.cs.colpnotes.R.layout;
-import ca.ualberta.cs.colpnotes.R.menu;
-import ca.ualberta.cs.colpnotes.R.string;
-import ca.ualberta.cs.colpnotes.helper.CurrencyHelper;
-import ca.ualberta.cs.colpnotes.model.Claim;
-import ca.ualberta.cs.colpnotes.model.ClaimStatus;
-import ca.ualberta.cs.colpnotes.model.Expense;
-import ca.ualberta.cs.colpnotes.viewcontroller.ClaimListController;
-import ca.ualberta.cs.colpnotes.viewcontroller.DatePickerController;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,8 +20,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import ca.ualberta.cs.colpnotes.R;
+import ca.ualberta.cs.colpnotes.helper.CurrencyHelper;
+import ca.ualberta.cs.colpnotes.model.Claim;
+import ca.ualberta.cs.colpnotes.model.ClaimStatus;
+import ca.ualberta.cs.colpnotes.model.Expense;
+import ca.ualberta.cs.colpnotes.viewcontroller.ClaimListController;
+import ca.ualberta.cs.colpnotes.viewcontroller.DatePickerController;
 
-/*
+/**
  * Lets the user modify the settings for an expense.
  * 
  * CLAIM_INDEX must be passed as an integer extra. The claim in
@@ -53,7 +47,10 @@ public class EditExpenseActivity extends Activity {
 	private Expense expense = null;		// This is the original expense
 	private Expense tempExpense = null;	// This will be copied back to expense when changes are saved
 	
-	private DatePickerController datePicker = null;
+	// Hold this reference so the controller will exist as long as this activity exists
+	@SuppressWarnings("unused")
+    private DatePickerController datePicker = null;
+	
 	private Spinner categorySpinner = null;
 	private Spinner currencySpinner = null;
 	private EditText amountEditText = null;
@@ -168,7 +165,7 @@ public class EditExpenseActivity extends Activity {
         	
         	if (claimIndex != -1) {
         		claim = ClaimListController.getClaimList().getClaim(claimIndex);
-            	if (expenseIndex != -1) expense = claim.getExpenseList().get(expenseIndex);
+            	if (expenseIndex != -1) expense = claim.getExpenseList().getExpense(expenseIndex);
         	}
         }
         
@@ -296,7 +293,9 @@ public class EditExpenseActivity extends Activity {
 		finish();
 	}
 	
-	// Ask before discarding changes
+	/**
+	 * Ask before discarding changes
+	 */
 	private void discardAlert() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(R.string.discard_message)
@@ -314,13 +313,15 @@ public class EditExpenseActivity extends Activity {
 		builder.create().show();
 	}
 	
-	// Save changes from the temporary expense to the actual expense
-	// If necessary, create a new expense in the claim
+	/**
+	 * Save changes from the temporary expense to the actual expense.
+	 * If necessary, create a new expense in the claim.
+	 */
 	private void saveChanges() {
 		// Create the new expense to the claim
 		if (expense == null) {
 			expense = new Expense(tempExpense);
-			claim.getExpenseList().add(expense);
+			claim.getExpenseList().addExpense(expense);
 		
 		// Expense already exists
 		} else {

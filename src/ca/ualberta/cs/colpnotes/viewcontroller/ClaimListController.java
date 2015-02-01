@@ -1,16 +1,14 @@
 package ca.ualberta.cs.colpnotes.viewcontroller;
 
 import java.io.IOException;
-import java.util.Observable;
-import java.util.Observer;
 
-import ca.ualberta.cs.colpnotes.model.ClaimList;
 import android.content.Context;
 import android.util.Log;
+import ca.ualberta.cs.colpnotes.model.ClaimList;
 
 /**
- * A singleton controller class which stores the global ClaimList.
- * Delegates to the ClaimList and ClaimListManager to handle events.
+ * A controller class which stores a single global ClaimList.
+ * Delegates to ClaimList and ClaimListManager to handle events.
  * 
  * Based on code from:
  * https://github.com/abramhindle/student-picker/blob/master/src/ca/softwareprocess/studentpicker/StudentListManager.java

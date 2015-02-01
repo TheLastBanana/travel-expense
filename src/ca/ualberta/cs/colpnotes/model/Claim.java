@@ -1,14 +1,9 @@
 package ca.ualberta.cs.colpnotes.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Currency;
-import java.util.HashMap;
-import java.util.Observable;
 
-/*
+/**
  * Holds information about a claim, including its corresponding Expenses.
  * Also responsible for validating this data in setter functions.
  */

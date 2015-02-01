@@ -3,22 +3,9 @@ package ca.ualberta.cs.colpnotes.activities;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import ca.ualberta.cs.colpnotes.R;
-import ca.ualberta.cs.colpnotes.R.id;
-import ca.ualberta.cs.colpnotes.R.layout;
-import ca.ualberta.cs.colpnotes.R.menu;
-import ca.ualberta.cs.colpnotes.R.string;
-import ca.ualberta.cs.colpnotes.helper.ClaimHelper;
-import ca.ualberta.cs.colpnotes.helper.ExpenseListHelper;
-import ca.ualberta.cs.colpnotes.model.Claim;
-import ca.ualberta.cs.colpnotes.model.ClaimStatus;
-import ca.ualberta.cs.colpnotes.model.Expense;
-import ca.ualberta.cs.colpnotes.viewcontroller.ClaimListController;
-import ca.ualberta.cs.colpnotes.viewcontroller.ExpenseAdapter;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,13 +14,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+import ca.ualberta.cs.colpnotes.R;
+import ca.ualberta.cs.colpnotes.helper.ClaimHelper;
+import ca.ualberta.cs.colpnotes.helper.ExpenseListHelper;
+import ca.ualberta.cs.colpnotes.model.Claim;
+import ca.ualberta.cs.colpnotes.model.ClaimStatus;
+import ca.ualberta.cs.colpnotes.model.Expense;
+import ca.ualberta.cs.colpnotes.viewcontroller.ClaimListController;
+import ca.ualberta.cs.colpnotes.viewcontroller.ExpenseAdapter;
 
-/*
- * Effectively acts as a gateway to all claim-editing functionality
+/**
+ * Acts as a gateway to all claim- and expense-editing functionality
  * for existing claims.
  * 
  * Lists the expenses for a given claim and allows the user to

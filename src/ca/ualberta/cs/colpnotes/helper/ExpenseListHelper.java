@@ -10,12 +10,17 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import ca.ualberta.cs.colpnotes.R;
-import ca.ualberta.cs.colpnotes.R.string;
 import ca.ualberta.cs.colpnotes.model.Expense;
 import ca.ualberta.cs.colpnotes.model.ExpenseList;
 import android.content.Context;
 
+/**
+ * A static class which contains functions to help working with ExpenseList.
+ */
 public class ExpenseListHelper {
+	// This is a static class; no instances
+	private ExpenseListHelper() {}
+	
 	/**
 	 * Get the totals for each currency type in an ExpenseList.
 	 * @param list The ExpenseList.

@@ -3,10 +3,6 @@ package ca.ualberta.cs.colpnotes.viewcontroller;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import ca.ualberta.cs.colpnotes.R;
-import ca.ualberta.cs.colpnotes.R.id;
-import ca.ualberta.cs.colpnotes.R.layout;
-import ca.ualberta.cs.colpnotes.model.Expense;
 import android.content.Context;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -14,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import ca.ualberta.cs.colpnotes.R;
+import ca.ualberta.cs.colpnotes.model.Expense;
 
-/*
+/**
  * An adapter used to display an ArrayList of Expenses.
  * 
  * Used the following code for reference:
@@ -30,8 +28,8 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
 	    this.expenses = expenses;
     }
 
-	/*
-	 * Returns a view with the custom claim layout.
+	/**
+	 * Return a view with the custom claim layout.
 	 */
 	@Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -58,9 +56,6 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
 	    	secondaryTextView.setText(dateString + " - " + expense.getCategory());
 	    }
 	    
-	    
 	    return view;
     }
-	
-	
 }

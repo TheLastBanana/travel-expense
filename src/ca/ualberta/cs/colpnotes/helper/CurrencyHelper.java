@@ -8,14 +8,20 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
+/**
+ * A static class which contains functions to help working with Currency.
+ */
 final public class CurrencyHelper {
 	// This is a static class; no instances
 	private CurrencyHelper() {}
 	
+	// Holds the list of all currencies
 	private static ArrayList<Currency> currencies = null;
 	
-	/*
-	 * Get the list of all currencies, sorted alphabetically by ISO code
+	/**
+	 * Get the list of all currencies, sorted alphabetically by ISO 4217 code.
+	 * 
+	 * @return A list of all currencies, sorted alphabetically by ISO 4217 code.
 	 */
 	public static ArrayList<Currency> getAllCurrencies() {
 		if (currencies == null) {

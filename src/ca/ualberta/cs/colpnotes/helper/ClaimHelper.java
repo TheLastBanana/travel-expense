@@ -1,23 +1,19 @@
 package ca.ualberta.cs.colpnotes.helper;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Currency;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
+import android.content.Context;
+import android.text.format.DateFormat;
 import ca.ualberta.cs.colpnotes.R;
-import ca.ualberta.cs.colpnotes.R.string;
 import ca.ualberta.cs.colpnotes.model.Claim;
 import ca.ualberta.cs.colpnotes.model.ClaimStatus;
 import ca.ualberta.cs.colpnotes.model.Expense;
-import android.content.Context;
-import android.text.format.DateFormat;
 
+/**
+ * A static class which contains functions to help working with Claim.
+ */
 public class ClaimHelper {
+	// This is a static class; no instances
+	private ClaimHelper() {}
+	
 	/**
 	 * List out the each of the claims and their expenses as a plaintext string.
 	 * Based on code from: http://stackoverflow.com/a/2197841
