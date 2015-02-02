@@ -11,3 +11,6 @@ The following sources were referenced for design advice or code. Each of these r
 * [A tutorial about ArrayAdapters by doctororeo](https://devtut.wordpress.com/2011/06/09/custom-arrayadapter-for-a-listview-android)
 * [General design of StudentPicker by Abram Hindle](https://github.com/abramhindle/student-picker)
 * [.gitignores by countless GitHub contributors](https://github.com/github/gitignore)
+
+### License
+This source code is licensed under the GNU GPL 3.0 license. See LICENSE for the full license.
