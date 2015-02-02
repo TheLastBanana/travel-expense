@@ -10,3 +10,4 @@ The following sources were referenced for design advice or code. Each of these r
 * [A tutorial about Java enums by Brennan Spies](http://www.ajaxonomy.com/2007/java/making-the-most-of-java-50-enum-tricks)
 * [A tutorial about ArrayAdapters by doctororeo](https://devtut.wordpress.com/2011/06/09/custom-arrayadapter-for-a-listview-android)
 * [General design of StudentPicker by Abram Hindle](https://github.com/abramhindle/student-picker)
+* [.gitignores by countless GitHub contributors](https://github.com/github/gitignore)
