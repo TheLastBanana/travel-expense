@@ -12,5 +12,8 @@ The following sources were referenced for design advice or code. Each of these r
 * [General design of StudentPicker by Abram Hindle](https://github.com/abramhindle/student-picker)
 * [.gitignores by countless GitHub contributors](https://github.com/github/gitignore)
 
+### Demo Video
+https://www.youtube.com/watch?v=1gqSEliUTYI
+
 ### License
 This source code is licensed under the GNU GPL 3.0 license. See LICENSE for the full license.
