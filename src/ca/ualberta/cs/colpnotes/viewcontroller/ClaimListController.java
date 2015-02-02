@@ -2,7 +2,6 @@ package ca.ualberta.cs.colpnotes.viewcontroller;
 
 import java.io.IOException;
 
-import android.content.Context;
 import android.util.Log;
 import ca.ualberta.cs.colpnotes.model.ClaimList;
 
@@ -16,8 +15,6 @@ import ca.ualberta.cs.colpnotes.model.ClaimList;
  */
 public class ClaimListController {
 	private static ClaimList claimList = null;
-	
-	Context context = null;
 	
 	/**
 	 * Get the global ClaimList.
