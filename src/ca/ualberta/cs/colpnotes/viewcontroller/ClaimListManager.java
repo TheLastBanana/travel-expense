@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import ca.ualberta.cs.colpnotes.helper.ClaimListHelper;
 import ca.ualberta.cs.colpnotes.model.ClaimList;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,8 +14,8 @@ import android.content.SharedPreferences.Editor;
 import android.util.Base64;
 
 /**
- * A singleton class which handles serialization, deserialization,
- * saving and loading of ClaimLists.
+ * A singleton class which handles operations on ClaimLists
+ * that require an Android context such as saving and loading.
  * 
  * Based on code from StudentPicker:
  * https://github.com/abramhindle/student-picker/blob/master/src/ca/softwareprocess/studentpicker/StudentListManager.java
@@ -61,7 +62,7 @@ public class ClaimListManager {
 	public void saveClaimList(ClaimList cl) throws IOException {
 		SharedPreferences settings = context.getSharedPreferences(prefFile, Context.MODE_PRIVATE);
 		Editor editor = settings.edit();
-		editor.putString(clKey, claimListToString(cl));
+		editor.putString(clKey, ClaimListHelper.claimListToString(cl));
 		editor.commit();
 	}
 
@@ -78,38 +79,8 @@ public class ClaimListManager {
 		if (claimListData.equals("")) {
 			return new ClaimList();
 		} else {
-			return claimListFromString(claimListData);
+			return ClaimListHelper.claimListFromString(claimListData);
 		}
-	}
-	
-	/**
-	 * Serialize a ClaimList serialized to a Base64 string.
-	 * @param cl The ClaimList.
-	 * @return A Base64-encoded string.
-	 * @throws IOException
-	 */
-	public String claimListToString(ClaimList cl) throws IOException {
-		ByteArrayOutputStream bo = new ByteArrayOutputStream();
-		ObjectOutputStream oo = new ObjectOutputStream(bo);
-		oo.writeObject(cl);
-		oo.close();
-		
-		byte bytes[] = bo.toByteArray();
-		return Base64.encodeToString(bytes, Base64.DEFAULT);
-	}
-
-	/**
-	 * Deserialize a ClaimList from a Base64 string.
-	 * @param claimListData The String to deserialize.
-	 * @return The deserialized ClaimList.
-	 * @throws ClassNotFoundException
-	 * @throws IOException
-	 */
-	public ClaimList claimListFromString(String claimListData) throws ClassNotFoundException, IOException {
-		ByteArrayInputStream bi = new ByteArrayInputStream(Base64.decode(claimListData, Base64.DEFAULT));
-		ObjectInputStream oi = new ObjectInputStream(bi);
-		
-		return (ClaimList)oi.readObject();	
 	}
 	
 	/**
