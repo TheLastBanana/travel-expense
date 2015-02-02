@@ -1,5 +1,5 @@
 # travel-expense
-A simple travel expense tracking application for Android.
+A simple travel expense tracking application for Android. Users can add claims for date ranges, then add expenses to those claims.
 
 ### References
 The following sources were referenced for design advice or code. Each of these references are also included as comments in the code to which they apply.
